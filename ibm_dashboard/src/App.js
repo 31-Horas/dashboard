@@ -29,7 +29,7 @@ function App() {
               <Dashboard/>
             </Box>
           </main>
-          <header >
+          <header className='App-header'>
             <DropzoneComponent onDrop={handleDrop} />
           </header>
         </div>
