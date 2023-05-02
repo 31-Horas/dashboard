@@ -16,7 +16,6 @@ const Welcome = () => {
                 <h1 className="title">Welcome to our app</h1>
                 <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <DropzoneComponent onHandle={handleDrop}/>
-                <button className="cta-button">Upload Excel</button>
             </div>
         </div>
         // <div className="split-screen">

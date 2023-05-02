@@ -50,59 +50,5 @@ body{
     margin-bottom: 2rem;
     max-width: 500px;
 }
-  
-.cta-button {
-    font-size: 1.5rem;
-    background-color: #006699;
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-}
-  
-.cta-button:hover {
-    background-color: #007acc;
-}
-  
-  
-/* .welcome-screen{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
 
-body{
-    width: 100%;
-    height: 100%;
-    background-color:floralwhite;
-}
-
-.split-screen {
-    display: flex;
-}
   
-.left {
-    width: 50%;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, .15);
-    backdrop-filter: blur(5px);
-}
-  
-.right {
-    width: 40%;
-}
-
-.image {
-    border-radius: 70px;
-    padding: 5px;
-    height: auto;
-    width: inherit;
-
-}
-   */

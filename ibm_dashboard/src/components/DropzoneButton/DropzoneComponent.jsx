@@ -19,13 +19,13 @@ const DropzoneComponent = ({ onDrop }) => {
 
     return (
         <Dropzone 
-            className="dropzone"
+            className="cta-button"
             onDrop={handleDrop}
             accept={{ '.xlsx, .xls': 'application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }}
             onDropRejected={handleDrop}
         >
             {({ getRootProps, getInputProps }) => (
-                <div className="dropzone" {...getRootProps()}>
+                <div className="cta-button" {...getRootProps()}>
                     <input {...getInputProps()} />
                     {file ? (
                         <p>File name: {file.name}</p>
