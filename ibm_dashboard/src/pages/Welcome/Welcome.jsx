@@ -9,22 +9,22 @@ const Welcome = () => {
     }
 
     return(
-        <div className="split-screen">
-            <div className="left">
-                {/* Content for the left half of the screen */}
-            </div>
-            <div className="right">
-                <img src='https://cdn.discordapp.com/attachments/1074703087278755850/1102815137565515786/800px-Sea_Otter_28Enhydra_lutris29_282516979052429_crop.png'/>
+        <div className="welcome-screen">
+            <div className="background"></div>
+            <div className="content">
+                <div className="logo"></div>
+                <h1 className="title">Welcome to our app</h1>
+                <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <DropzoneComponent onHandle={handleDrop}/>
+                <button className="cta-button">Upload Excel</button>
             </div>
         </div>
-        // <div>
-        //     <div className='container'>
-        //         <h1>
-        //             Welcome
-        //         </h1>
+        // <div className="split-screen">
+        //     <div className="left">
+        //         {/* Content for the left half of the screen */}
         //     </div>
-        //     <div>
-        //         <img src='https://cdn.discordapp.com/attachments/1074703087278755850/1102815137565515786/800px-Sea_Otter_28Enhydra_lutris29_282516979052429_crop.png'/>
+        //     <div className="right">
+        //         <img className='image' src='https://cdn.discordapp.com/attachments/1074703087278755850/1102815137565515786/800px-Sea_Otter_28Enhydra_lutris29_282516979052429_crop.png'/>
         //     </div>
         // </div>
     );
