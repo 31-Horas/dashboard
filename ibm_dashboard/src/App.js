@@ -4,6 +4,8 @@ import Dashboard from "./pages/Dashboard";
 import Welcome from './pages/Welcome/Welcome';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from './pages/Layout';
+import LoginForm from './pages/Login/Login';
+import Login from './pages/Login/Login';
 
 
 function App() {
@@ -12,8 +14,8 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Welcome />}>
-          <Route index element={<Welcome />} />
+          <Route path="/" element={<Login />}>
+          <Route index element={<Login />} />
           <Route path="dashboard" element={<Dashboard />} />
           </Route>
         </Routes>
