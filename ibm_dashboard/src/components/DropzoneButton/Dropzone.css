@@ -1,0 +1,36 @@
+/* Styles for the Dropzone component */
+.dropzone {
+    border: 2px dashed #333 ;
+    border-radius: 5px ;
+    padding: 20px ;
+    text-align: center ;
+    background-color: #4caed8;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    width: 50%;
+}
+
+.dropzone p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.dropzone.active {
+    background-color: #f7f7f7 ;
+}
+
+.dropzone.accept {
+    border-color: #4CAF50 ;
+}
+
+.dropzone.reject {
+    border-color: #FF5252 ;
+}
+
+.dropzone-wrapper {
+    display: flex ;
+    justify-content: center;
+    align-items: center ;
+    height: 100% ;
+}

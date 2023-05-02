@@ -1,29 +1,25 @@
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
+import './Dropzone.css'
 
-function DropzoneComponent({ onDrop }) {
+const DropzoneComponent = ({ onDrop }) => {
     onDrop = { handleDrop }
     const [file, setFile] = useState(null);
 
     function handleDrop(acceptedFiles, rejectedFiles) {
         if (rejectedFiles.length > 0) {
             window.alert('Only Excel files are allowed.');
-            <div className='dropzone.reject'>
-
-            </div>
-
-
+            <div className='dropzone.reject'></div>
         } else {
             setFile(acceptedFiles[0]);
             onDrop(acceptedFiles[0]);
-            <div className='dropzone.accept'>
-
-            </div>
+            <div className='dropzone.accept'></div>
         }
     }
 
     return (
-        <Dropzone
+        <Dropzone 
+            className="dropzone"
             onDrop={handleDrop}
             accept={{ '.xlsx, .xls': 'application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }}
             onDropRejected={handleDrop}
