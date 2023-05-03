@@ -1,13 +1,13 @@
 import { Box } from "@mui/material";
-import Topbar from '../components/Topbar'
-import Sidebar from '../components/Sidebar'
+import Topbar from '../../components/Topbar'
+import Sidebar from '../../components/Sidebar'
 
 const Dashboard = () => {
     return (
         <main className="context">
             <Topbar />
             <Box display={"flex"}>
-                <Sidebar/>
+                {/* <Sidebar/> */}
             </Box>
         </main>
     );

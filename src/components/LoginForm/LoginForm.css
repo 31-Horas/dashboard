@@ -51,8 +51,17 @@ form {
 }
 
 .bottom{
-    align-self: flex-end;
-    justify-self: center;
+    display: flex;
     color: #007bff;
     text-decoration: none;
+}
+.sign-up{
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 5px;
+    align-self: flex-end;
+}
+
+.sign-up:hover{
+    text-decoration: underline;
 }

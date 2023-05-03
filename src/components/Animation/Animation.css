@@ -3,13 +3,13 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #007bff;
+  /* background-color: #007bff; */
 }
 
 .box {
   width: 100px;
   height: 100px;
-  background-color: #3498db;
+  background-color: #b651ecec;
   animation-name: spin;
   animation-duration: 5000ms;
   animation-iteration-count: infinite;

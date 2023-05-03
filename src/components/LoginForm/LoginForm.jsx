@@ -110,7 +110,7 @@ const LoginForm = () => {
                 </Button>
             </div>
             <div className="bottom">
-                <a href="https://www.chess.com/login">Sign up</a>
+                <a className="sign-up" href="https://www.chess.com/login">Sign up</a>
             </div>
         </div>
     );
