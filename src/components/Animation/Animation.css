@@ -1,0 +1,44 @@
+.animation-container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.animation {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+  
+.circle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    animation: animate 2s ease-in-out infinite;
+}
+  
+.circle:nth-child(2) {
+    top: 0;
+    left: 25%;
+}
+  
+.circle:nth-child(3) {
+    top: 0;
+    right: 0;
+}
+  
+@keyframes animate {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(50px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+}
+  
