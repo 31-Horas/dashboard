@@ -39,7 +39,6 @@ form {
   
 .forgot-password {
     margin-top: 5px;
-    text-align: right;
 }
   
 .forgot-password a {
@@ -49,4 +48,11 @@ form {
   
 .forgot-password a:hover {
     text-decoration: underline;
+}
+
+.bottom{
+    align-self: flex-end;
+    justify-self: center;
+    color: #007bff;
+    text-decoration: none;
 }

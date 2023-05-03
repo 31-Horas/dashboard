@@ -8,8 +8,10 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import { Button } from "@mui/material";
 import GoogleIcon from '@mui/icons-material/Google';
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -26,6 +28,7 @@ const LoginForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        navigate('/welcome');
         // Handle form submission logic here
     };
 
@@ -90,6 +93,7 @@ const LoginForm = () => {
                         variant="contained"
                         color="primary"
                         size="medium"
+                        onClick={handleSubmit}
                     >
                         Login
                     </Button>
@@ -104,6 +108,9 @@ const LoginForm = () => {
                 >
                     Sign in with Google
                 </Button>
+            </div>
+            <div className="bottom">
+                <a href="https://www.chess.com/login">Sign up</a>
             </div>
         </div>
     );
