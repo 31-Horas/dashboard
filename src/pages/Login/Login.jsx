@@ -5,9 +5,13 @@ import Animation from '../../components/Animation/Animation';
 
 const Login = () => {
     return (
-        <div >
-            <LoginForm/>
-            <Animation/>
+        <div className='split-screen'>
+            <div className='left'>
+                <Animation/>
+            </div>
+            <div className='right'>
+                <LoginForm/>
+            </div>
         </div>
     );
 }

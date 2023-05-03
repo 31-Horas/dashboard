@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Welcome.css' 
 import DropzoneComponent from '../../components/DropzoneButton/DropzoneComponent';
-import { Container } from '@mui/material';
 
 const Welcome = () => {
     function handleDrop(file) {
@@ -11,9 +10,9 @@ const Welcome = () => {
     return(
         <div className="welcome-screen">
             <div className="background"></div>
-            <div className="content">
+            <div className="content">   
                 <div className="logo"></div>
-                <h1 className="title">Welcome to our app</h1>
+                <h1 className="title">Welcome to OTTERBOARD</h1>
                 <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <DropzoneComponent onHandle={handleDrop}/>
             </div>

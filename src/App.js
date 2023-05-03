@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Box, CssBaseline, ThemeProvider } from '@mui/material';
-import Dashboard from './pages/Dashboard';
+// import Dashboard from './pages/Dashboard';
 import Layout from './pages/Layout';
 import LoginForm from './pages/Login/Login';
 import Welcome from './pages/Welcome/Welcome';
