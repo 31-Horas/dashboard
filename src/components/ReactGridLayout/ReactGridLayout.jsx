@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import './ReactGridLayout.css'
+import axios from "axios";
 
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
@@ -41,8 +42,22 @@ const ReactGridLayout = () => {
         setWidgetArray(tempArray);
     };
 
+    const [data, setData] = useState([]);
+    
+    const getData = async () => {
+        const { data } = await axios.get('https://rickandmortyapi.com/api/episode/2');
+        setData(data);
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
+
     return (
         <div>
+            <div>
+                {JSON.stringify(data)}
+            </div>
             <button onClick={() => handleAdd()}>Add Widget</button>
 
             <ResponsiveReactGridLayout
