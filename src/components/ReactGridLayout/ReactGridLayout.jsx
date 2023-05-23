@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
+import { Line } from "react-chartjs-2";
+import axios from "axios";
 import './ReactGridLayout.css'
-
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -14,6 +15,17 @@ const ReactGridLayout = () => {
         { i: "widget2", x: 2, y: 2, w: 2, h: 2 },
         { i: "widget3", x: 4, y: 4, w: 2, h: 2 },
     ]);
+    const [chartData, setChartData] = useState([]);
+
+    useEffect(() => {
+        axios.get("/api/data")
+            .then(response => {
+                setChartData(response.data);
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    }, []);
 
     const handleModify = (layouts, layout) => {
         const tempArray = widgetArray;
@@ -87,6 +99,7 @@ const ReactGridLayout = () => {
                                 x
                             </button>
                             <div>{widget.i}</div>
+                            <Line data={chartData} />
                         </div>
                     );
                 })}
