@@ -186,7 +186,7 @@ const MiniDrawer = () => {
 
         <Typography paragraph>
           The widgets that will display the graphs, tables and other information are being worked on.
-          Buttons not final.
+          Buttons not finals.
         </Typography>
       </Box>
     </Box>
