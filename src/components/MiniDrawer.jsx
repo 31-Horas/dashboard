@@ -20,7 +20,6 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ReactGridLayout from './ReactGridLayout/ReactGridLayout.jsx';
 import Widget from './Widget/Widget.jsx';
-import Grid from './Grid/Grid.jsx'
 
 const drawerWidth = 240;
 

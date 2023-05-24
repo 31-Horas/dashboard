@@ -68,7 +68,7 @@ const ReactGridLayout = () => {
                 breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                 preventCollision={false}
                 cols={{ lg: 8, md: 8, sm: 4, xs: 2, xxs: 2 }}
-                autoSize={true}
+                autoSize={false}
                 margin={{
                     lg: [20, 20],
                     md: [20, 20],
@@ -89,11 +89,11 @@ const ReactGridLayout = () => {
                                 h: widget?.h,
                                 i: widget.i,
                                 minW: 2,
-                                maxW: Infinity,
+                                maxW: 50,
                                 minH: 2,
-                                maxH: Infinity,
+                                maxH: 50,
                                 isDraggable: true,
-                                isResizable: true,
+                                isResizable: false,
                             }}
                         >
                             <button
@@ -102,7 +102,6 @@ const ReactGridLayout = () => {
                             >
                                 x
                             </button>
-                            <div>{widget.i}</div>
                             <div>
                                 <Widget/>
                             </div>
