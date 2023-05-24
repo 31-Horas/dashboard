@@ -4,6 +4,7 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import './ReactGridLayout.css'
 import axios from "axios";
+import Widget from "../Widget/Widget";
 
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
@@ -102,6 +103,9 @@ const ReactGridLayout = () => {
                                 x
                             </button>
                             <div>{widget.i}</div>
+                            <div>
+                                <Widget/>
+                            </div>
                         </div>
                     );
                 })}

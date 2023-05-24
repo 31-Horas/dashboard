@@ -1,5 +1,4 @@
 import * as React from 'react';
-//import ReactGridLayout from '/Users/emiliov/Desktop/dashboard/src/components/ReactGridLayout/ReactGridLayout.jsx';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -20,6 +19,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ReactGridLayout from './ReactGridLayout/ReactGridLayout.jsx';
+import Widget from './Widget/Widget.jsx';
+import Grid from './Grid/Grid.jsx'
 
 const drawerWidth = 240;
 
@@ -182,12 +183,10 @@ const MiniDrawer = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
 
+        {/*GRID LAYOUT*/}
         <ReactGridLayout />
-
-        <Typography paragraph>
-          The widgets that will display the graphs, tables and other information are being worked on.
-          Buttons not finals.
-        </Typography>
+        {/* <Widget/>
+        <Grid/> */}
       </Box>
     </Box>
   );
