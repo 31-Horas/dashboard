@@ -18,7 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import ReactGridLayout from './ReactGridLayout/ReactGridLayout.jsx';
+import Grid from './Grid/Grid.jsx';
 import Widget from './Widget/Widget.jsx';
 
 const drawerWidth = 240;
@@ -183,9 +183,7 @@ const MiniDrawer = () => {
         <DrawerHeader />
 
         {/*GRID LAYOUT*/}
-        <ReactGridLayout />
-        {/* <Widget/>
-        <Grid/> */}
+        <Grid />
       </Box>
     </Box>
   );
