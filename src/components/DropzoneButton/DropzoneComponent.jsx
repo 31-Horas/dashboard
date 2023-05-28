@@ -5,6 +5,8 @@ import './Dropzone.css';
 
 
 const DropzoneComponent = ({ onHandle }) => {
+    const navigate = useNavigate(); 
+
     const [file, setFile] = useState(null);
   
     async function handleDrop(acceptedFiles) {
@@ -23,6 +25,8 @@ const DropzoneComponent = ({ onHandle }) => {
   
         // Handle the response from the backend
         if (response.status === 200) {
+          //navigates to dashboard
+          navigate("/dashboard")
           // File was successfully uploaded
           console.log('File uploaded successfully');
         } else {
