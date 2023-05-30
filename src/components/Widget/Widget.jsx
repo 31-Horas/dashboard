@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const Widget = () => {
+const Widget = ({ graphData }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -19,8 +19,7 @@ const Widget = () => {
           Otter
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {JSON.stringify(graphData)}
         </Typography>
       </CardContent>
       <CardActions>
