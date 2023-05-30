@@ -28,8 +28,9 @@ const Grid = () => {
   const [data, setData] = useState([]);
     
   const getData = async () => {
-    const { data } = await axios.get('https://rickandmortyapi.com/api/episode/2');
+    const { data } = await axios.get('http://localhost:5000/data.json');
     setData(data);
+    // console.log(JSON.stringify(data));
   }
 
   useEffect(() => {
