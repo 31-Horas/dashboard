@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import './Dropzone.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const DropzoneComponent = ({ onHandle }) => {
