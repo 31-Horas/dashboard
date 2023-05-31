@@ -25,12 +25,18 @@ import axios from 'axios';
 
 
 const Grid = () => {
-  const [data, setData] = useState([]);
-    
+  const [graphs, setGraphs] = useState([]);
+  
   const getData = async () => {
     const { data } = await axios.get('http://localhost:5000/data.json');
-    setData(data);
-    // console.log(JSON.stringify(data));
+    setGraphs(data);
+    // console.log("data", graphs);
+  }
+
+  const parseData = () => {
+    for(let i = 0; i < graphs.length; i++) {
+      console.log("parse data", JSON.stringify(graphs[i]));
+    }
   }
 
   useEffect(() => {
@@ -52,24 +58,19 @@ const Grid = () => {
     <GridLayout
       className="layout"
       layout={layout}
-      cols={layout.length}
+      cols={4}
       rowHeight={400}
       width={window.innerWidth}
       onLayoutChange={onLayoutChange}
     >
       {layout.map((curr) => {
+        // const itemData = data.find(item => item.i === curr.i);
         return (
           <div key={curr.i}>
-            <Widget graphData={data}/>
+            <Widget graphData={graphs}/>
           </div>
         )
       })}
-      {/* <div key="1">Item 1
-        <Widget/>
-      </div>
-      <div key="2">Item 2</div>
-      <div key="3">Item 3</div>
-      <div key="4">Item 4</div> */}
     </GridLayout>
   );
 };

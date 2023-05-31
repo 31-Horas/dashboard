@@ -5,33 +5,32 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Line, Bar, Doughnut } from 'react-chartjs-2';
+import { VictoryBar } from 'victory';
+import BarChart from '../BarChart/BarChart';
 
 const Widget = ({ graphData }) => {
 
-  console.log(JSON.stringify(graphData.data));
+  console.log(graphData);
 
-  // const graphConfig = {
-  //   labels: graphData.data.labels,
-  //   datasets: graphData.data.datasets
-  // }
-
-  // console.log(graphConfig);
+  const data = [
+    {quarter: 1, earnings: 13000},
+    {quarter: 2, earnings: 16500},
+    {quarter: 3, earnings: 14250},
+    {quarter: 4, earnings: 19000}
+  ];
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
+      {/* <CardMedia
         sx={{ height: 140 }}
         image="https://www.shutterstock.com/image-photo/portrait-otter-uk-260nw-1980762944.jpg"
         title="green iguana"
-      />
-      <div>
-        {/* <Line data={graphConfig}/> */}
-      </div>
+      /> */}
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           Otter
         </Typography>
+        <BarChart data={data}/>
         <Typography variant="body2" color="text.secondary">
           {JSON.stringify(graphData)}
         </Typography>
