@@ -5,16 +5,7 @@
 //     //     setWidgetArray(tempArray);
 //     // };
 
-//     // const [data, setData] = useState([]);
-    
-//     // const getData = async () => {
-//     //     const { data } = await axios.get('https://rickandmortyapi.com/api/episode/2');
-//     //     setData(data);
-//     // }
-
-//     // useEffect(() => {
-//     //     getData();
-//     // }, []);
+  
 
 import React, { useState, useEffect } from 'react';
 import GridLayout from 'react-grid-layout';

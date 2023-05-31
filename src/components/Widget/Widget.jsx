@@ -5,8 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { VictoryBar } from 'victory';
 import BarChart from '../BarChart/BarChart';
+import { Line } from "react-chartjs-2";
+import LineChart from '../../LineChart/LineChart';
 
 const Widget = ({ graphData }) => {
 
@@ -19,8 +20,32 @@ const Widget = ({ graphData }) => {
     {quarter: 4, earnings: 19000}
   ];
 
+  const data2 = {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Orange', 'Yellow', 'Green', 'Purple'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          type: 'category' // Use 'category' scale for labels
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ minWidth: 345, maxWidth: 400 }}>
       {/* <CardMedia
         sx={{ height: 140 }}
         image="https://www.shutterstock.com/image-photo/portrait-otter-uk-260nw-1980762944.jpg"
@@ -28,17 +53,18 @@ const Widget = ({ graphData }) => {
       /> */}
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Otter
+          Random Graph
         </Typography>
-        <BarChart data={data}/>
-        <Typography variant="body2" color="text.secondary">
+        {/* <BarChart data={data}/> */}
+        <LineChart data={data2}/>
+        {/* <Typography variant="body2" color="text.secondary">
           {JSON.stringify(graphData)}
-        </Typography>
+        </Typography> */}
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Button size="small">Share</Button>
         <Button size="small">Learn More</Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 };
