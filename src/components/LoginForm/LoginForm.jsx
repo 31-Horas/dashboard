@@ -15,21 +15,50 @@ const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+    // Validate email and password
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/; // At least 8 characters, one letter, and one number
+
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
+
+        if (!emailRegex.test(email)) {
+            setEmailError(true);
+        } else {
+            setEmailError(false); // Reset email error state on change
+        }
     };
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
+
+        if (!passwordRegex.test(password)) {
+            setPasswordError(true);
+        } else{
+            setPasswordError(false); // Reset password error state on change
+        }
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        if (!emailRegex.test(email)) {
+            setEmailError(true);
+            return; // Stop form submission if email is invalid
+        }
+ 
+        if (!passwordRegex.test(password)) {
+            setPasswordError(true);
+            return; // Stop form submission if password is invalid
+        }
+ 
         navigate('/welcome');
-        // Handle form submission logic here
     };
 
     return (
@@ -37,51 +66,109 @@ const LoginForm = () => {
             <div className="logo"></div>
             <h1>Welcome to OtterBoard!</h1>
             <form onSubmit={handleSubmit}>
-                {/* Mail input */}
+                {/* mail input/error */}
                 <div className="input-container">
-                    <TextField
-                        className='input-container'
-                        fullWidth
-                        variant='outlined'
-                        type='text'
-                        label='Email'
-                        size="small"
-                        value={email}
-                        onChange={handleEmailChange}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <MailOutlinedIcon/>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
+                    {emailError && (
+                        <TextField
+                            className='input-container'
+                            fullWidth
+                            autoFocus
+                            error
+                            helperText="not a valid email."
+                            variant='outlined'
+                            type='text'
+                            label='Email'
+                            size="small"
+                            value={email}
+                            onChange={handleEmailChange}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <MailOutlinedIcon/>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
+                    {!emailError && (
+                        <TextField
+                            className='input-container'
+                            fullWidth
+                            autoFocus
+                            variant='outlined'
+                            type='text'
+                            label='Email'
+                            size="small"
+                            value={email}
+                            onChange={handleEmailChange}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <MailOutlinedIcon/>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
                 </div>
-                {/* Password input */}
+
+                 
+                {/* Password input/error */}
+                
                 <div className="input-container">
-                    <TextField
-                        fullWidth
-                        variant='outlined'
-                        type={showPassword ? 'text' : 'password'}
-                        label='Password'
-                        size="small"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
+                    {passwordError && (
+                        <TextField
+                            fullWidth
+                            autoFocus
+                            error
+                            helperText="not a valid password. At least 8 characters. Move this to a sign up."
+                            variant='outlined'
+                            type={showPassword ? 'text' : 'password'}
+                            label='Password'
+                            size="small"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                edge="end"
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
+                    {!passwordError && (
+                        <TextField
+                            autoFocus
+                            fullWidth
+                            type={showPassword ? 'text' : 'password'}
+                            label='Password'
+                            size="small"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
                                             aria-label="toggle password visibility"
                                             onClick={handleClickShowPassword}
                                             edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
                 </div>
+
 
                 <div className="forgot-password">
                     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Forgot your password?</a>
