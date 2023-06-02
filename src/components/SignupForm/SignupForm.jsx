@@ -1,5 +1,5 @@
-import { useState } from "react";
-import './LoginForm.css'
+import { React, useState } from "react";
+import './SignupForm.css'
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
@@ -7,10 +7,9 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import { Button } from "@mui/material";
-import GoogleIcon from '@mui/icons-material/Google';
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
+const SignupForm = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -64,7 +63,8 @@ const LoginForm = () => {
     return (
         <div className="login-form">
             <div className="logo"></div>
-            <h1>Welcome to OtterBoard!</h1>
+            <h1>Join the to OtterBoard family!</h1>
+            <h2>Sign up</h2>
             <form onSubmit={handleSubmit}>
                 {/* mail input/error */}
                 <div className="input-container">
@@ -113,38 +113,63 @@ const LoginForm = () => {
                 </div>
 
                  
-                {/* Password input */}
+                {/* Password input/error */}
                 
                 <div className="input-container">
-                    <TextField
-                        fullWidth
-                        type={showPassword ? 'text' : 'password'}
-                        label='Password'
-                        size="small"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </div>
-
-
-                <div className="forgot-password">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Forgot your password?</a>
+                    {passwordError && (
+                        <TextField
+                            fullWidth
+                            autoFocus
+                            error
+                            helperText="Not a valid password. Must be at least 8 characters. Contain 1 number and an uppercase letter"
+                            variant='outlined'
+                            type={showPassword ? 'text' : 'password'}
+                            label='Password'
+                            size="small"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                edge="end"
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
+                    {!passwordError && (
+                        <TextField
+                            autoFocus
+                            fullWidth
+                            type={showPassword ? 'text' : 'password'}
+                            label='Password'
+                            size="small"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            edge="end"
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
                 </div>
                 
-                {/* Login button */}
+                {/* Sign up button */}
                 <div className="login-button">
                     <Button 
                         variant="contained"
@@ -152,26 +177,13 @@ const LoginForm = () => {
                         size="medium"
                         onClick={handleSubmit}
                     >
-                        Login
+                        Sign-up
                     </Button>
                 </div>
             </form>
-            <div className="google-button">
-                <Button 
-                    variant="outlined" 
-                    color="primary"
-                    size="medium"
-                    startIcon={<GoogleIcon />}
-                >
-                    Sign in with Google
-                </Button>
-            </div>
-            <div className="bottom">
-                <a className="sign-up" href="https://www.chess.com/login">Sign up</a>
-            </div>
         </div>
     );
-}
 
-export default LoginForm;
+};
 
+export default SignupForm;
