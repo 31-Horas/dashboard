@@ -6,15 +6,17 @@ import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
-import { Button } from "@mui/material";
-import GoogleIcon from '@mui/icons-material/Google';
+import { Button, FormGroup, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 const LoginForm = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [rememberMe, setRememberMe] = useState(false);
 
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
@@ -46,6 +48,10 @@ const LoginForm = () => {
         }
     };
 
+    const handleCheckBoxChange = (event) => {
+        setRememberMe(event.target.checked);
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
       
@@ -59,18 +65,17 @@ const LoginForm = () => {
           return; // Stop form submission if password is invalid
         }
       
-        // const response = await axios.post('http://localhost:5000/auth/signin', { email: email, password: password });
-        // // Handle the response from the backend
-        // if (response.status === 200) {
-        //     //navigates to dashboard
-        //     navigate("/welcome")
-        //     // File was successfully uploaded
-        //     console.log('Login successful');
-        // } else {
-        //     // File upload failed
-        //     console.log('Login failed');
-        // }
-        navigate("/welcome");
+        const response = await axios.post('http://localhost:5000/auth/signin', { email: email, password: password, remember: rememberMe});
+        // Handle the response from the backend
+        if (response.status === 200) {
+            //navigates to dashboard
+            navigate("/welcome")
+            // File was successfully uploaded
+            console.log('Login successful');
+        } else {
+            // File upload failed
+            console.log('Login failed');
+        }
       };
 
     return (
@@ -150,11 +155,17 @@ const LoginForm = () => {
                         }}
                     />
                 </div>
-
-
-                <div className="forgot-password">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Forgot your password?</a>
-                </div>
+                
+                <Box display="flex">
+                    <div>
+                        <FormGroup>
+                            <FormControlLabel control={<Checkbox checked={rememberMe} onChange={handleCheckBoxChange} />} label="Remember me" />
+                        </FormGroup>
+                    </div>
+                    <div className="forgot-password">
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Forgot your password?</a>
+                    </div>
+                </Box>
                 
                 {/* Login button */}
                 <div className="login-button">
@@ -168,16 +179,6 @@ const LoginForm = () => {
                     </Button>
                 </div>
             </form>
-            <div className="google-button">
-                <Button 
-                    variant="outlined" 
-                    color="primary"
-                    size="medium"
-                    startIcon={<GoogleIcon />}
-                >
-                    Sign in with Google
-                </Button>
-            </div>
             <div className="bottom">
                 <a className="sign-up" href="/signup">Sign up</a>
             </div>
