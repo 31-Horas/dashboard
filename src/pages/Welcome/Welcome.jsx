@@ -11,14 +11,14 @@ const Welcome = () => {
         axios.get('http://localhost:5000/auth/signin')
             .then(response => {
                 // Handle the response from the backend
-                if (response.status === 201) {
+                if (response.status === 200) {
                     // User is already logged in
                     console.log('Already logged in');
                 } else if (response.status === 202) {
                     // User is not logged in, redirect to the login page
                     navigate("/");
                     console.log('Not logged in, redirecting to login');
-                }
+                }                
             })
             .catch(error => {
                 // Handle any errors that occur during the request
