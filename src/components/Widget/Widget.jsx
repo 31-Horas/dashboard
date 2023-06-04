@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import BarChart from '../BarChart/BarChart';
 import { Line } from "react-chartjs-2";
-import LineChart from '../../LineChart/LineChart';
+import LineChart from "../LineChart/LineChart"
 
 const Widget = ({ graphData }) => {
 

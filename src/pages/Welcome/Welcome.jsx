@@ -6,25 +6,25 @@ import axios from 'axios';
 
 const Welcome = () => {
     const navigate = useNavigate();
-    useEffect(() => {
-        // Send Axios GET request to verify if the user is logged in
-        axios.get('http://localhost:5000/auth/signin')
-            .then(response => {
-                // Handle the response from the backend
-                if (response.status === 201) {
-                    // User is already logged in
-                    console.log('Already logged in');
-                } else if (response.status === 202) {
-                    // User is not logged in, redirect to the login page
-                    navigate("/");
-                    console.log('Not logged in, redirecting to login');
-                }
-            })
-            .catch(error => {
-                // Handle any errors that occur during the request
-                console.error('Error checking login status:', error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     // Send Axios GET request to verify if the user is logged in
+    //     axios.get('http://localhost:5000/auth/signin')
+    //         .then(response => {
+    //             // Handle the response from the backend
+    //             if (response.status === 201) {
+    //                 // User is already logged in
+    //                 console.log('Already logged in');
+    //             } else if (response.status === 202) {
+    //                 // User is not logged in, redirect to the login page
+    //                 navigate("/");
+    //                 console.log('Not logged in, redirecting to login');
+    //             }
+    //         })
+    //         .catch(error => {
+    //             // Handle any errors that occur during the request
+    //             console.error('Error checking login status:', error);
+    //         });
+    // }, []);
 
     function handleDrop(file) {
         console.log('File selected:', file);

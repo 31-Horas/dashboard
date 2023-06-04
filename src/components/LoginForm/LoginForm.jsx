@@ -59,17 +59,18 @@ const LoginForm = () => {
           return; // Stop form submission if password is invalid
         }
       
-        const response = await axios.post('http://localhost:5000/auth/signin', { email: email, password: password });
-        // Handle the response from the backend
-        if (response.status === 200) {
-            //navigates to dashboard
-            navigate("/welcome")
-            // File was successfully uploaded
-            console.log('Login successful');
-          } else {
-            // File upload failed
-            console.log('Login failed');
-          }
+        // const response = await axios.post('http://localhost:5000/auth/signin', { email: email, password: password });
+        // // Handle the response from the backend
+        // if (response.status === 200) {
+        //     //navigates to dashboard
+        //     navigate("/welcome")
+        //     // File was successfully uploaded
+        //     console.log('Login successful');
+        // } else {
+        //     // File upload failed
+        //     console.log('Login failed');
+        // }
+        navigate("/welcome");
       };
 
     return (

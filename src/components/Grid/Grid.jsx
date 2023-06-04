@@ -13,6 +13,7 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import Widget from '../Widget/Widget';
 import axios from 'axios';
+import { JavascriptTwoTone } from '@mui/icons-material';
 
 
 const Grid = () => {
@@ -21,6 +22,7 @@ const Grid = () => {
   const getData = async () => {
     const { data } = await axios.get('http://localhost:5000/data.json');
     setGraphs(data);
+    console.log(JSON.parse(data));
     // console.log("data", graphs);
   }
 
