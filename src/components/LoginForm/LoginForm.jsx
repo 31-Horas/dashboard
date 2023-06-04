@@ -9,6 +9,7 @@ import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import { Button } from "@mui/material";
 import GoogleIcon from '@mui/icons-material/Google';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -45,21 +46,31 @@ const LoginForm = () => {
         }
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
+      
         if (!emailRegex.test(email)) {
-            setEmailError(true);
-            return; // Stop form submission if email is invalid
+          setEmailError(true);
+          return; // Stop form submission if email is invalid
         }
- 
+      
         if (!passwordRegex.test(password)) {
-            setPasswordError(true);
-            return; // Stop form submission if password is invalid
+          setPasswordError(true);
+          return; // Stop form submission if password is invalid
         }
- 
-        navigate('/welcome');
-    };
+      
+        const response = await axios.post('http://localhost:5000/auth/signin', { email: email, password: password });
+        // Handle the response from the backend
+        if (response.status === 200) {
+            //navigates to dashboard
+            navigate("/welcome")
+            // File was successfully uploaded
+            console.log('Login successful');
+          } else {
+            // File upload failed
+            console.log('Login failed');
+          }
+      };
 
     return (
         <div className="login-form">
@@ -167,7 +178,7 @@ const LoginForm = () => {
                 </Button>
             </div>
             <div className="bottom">
-                <a className="sign-up" href="https://www.chess.com/login">Sign up</a>
+                <a className="sign-up" href="/signup">Sign up</a>
             </div>
         </div>
     );

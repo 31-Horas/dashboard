@@ -8,6 +8,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const SignupForm = () => {
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ const SignupForm = () => {
         }
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (!emailRegex.test(email)) {
@@ -56,8 +57,22 @@ const SignupForm = () => {
             setPasswordError(true);
             return; // Stop form submission if password is invalid
         }
- 
-        navigate('/welcome');
+        const response = await axios.post('http://localhost:5000/auth/signup', { email: email, password: password });
+        // Handle the response from the backend
+        if (response.status === 201) {
+            //navigates to dashboard
+            navigate("/")
+            // File was successfully uploaded
+            console.log('Signup successful');
+          } 
+          if (response.status === 201){
+            navigate("/")
+            console.log('Email already exists');
+          }
+          else {
+            // File upload failed
+            console.log('Signup failed');
+          }
     };
 
     return (

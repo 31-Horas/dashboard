@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Welcome.css' 
 import DropzoneComponent from '../../components/DropzoneButton/DropzoneComponent';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Welcome = () => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        // Send Axios GET request to verify if the user is logged in
+        axios.get('http://localhost:5000/auth/signin')
+            .then(response => {
+                // Handle the response from the backend
+                if (response.status === 201) {
+                    // User is already logged in
+                    console.log('Already logged in');
+                } else if (response.status === 202) {
+                    // User is not logged in, redirect to the login page
+                    navigate("/");
+                    console.log('Not logged in, redirecting to login');
+                }
+            })
+            .catch(error => {
+                // Handle any errors that occur during the request
+                console.error('Error checking login status:', error);
+            });
+    }, []);
+
     function handleDrop(file) {
         console.log('File selected:', file);
     }
@@ -17,14 +40,6 @@ const Welcome = () => {
                 <DropzoneComponent onHandle={handleDrop}/>
             </div>
         </div>
-        // <div className="split-screen">
-        //     <div className="left">
-        //         {/* Content for the left half of the screen */}
-        //     </div>
-        //     <div className="right">
-        //         <img className='image' src='https://cdn.discordapp.com/attachments/1074703087278755850/1102815137565515786/800px-Sea_Otter_28Enhydra_lutris29_282516979052429_crop.png'/>
-        //     </div>
-        // </div>
     );
 };
 
