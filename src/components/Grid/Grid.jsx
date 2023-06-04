@@ -13,22 +13,21 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import Widget from '../Widget/Widget';
 import axios from 'axios';
-import { JavascriptTwoTone } from '@mui/icons-material';
 
 
 const Grid = () => {
-  const [graphs, setGraphs] = useState([]);
+  const [graphs, setGraphs] = useState({});
   
   const getData = async () => {
-    const { data } = await axios.get('http://localhost:5000/data.json');
-    setGraphs(data);
-    console.log(JSON.parse(data));
-    // console.log("data", graphs);
-  }
-
-  const parseData = () => {
-    for(let i = 0; i < graphs.length; i++) {
-      console.log("parse data", JSON.stringify(graphs[i]));
+    try {
+      const { data } = await axios.get('http://localhost:5000/data.json');
+      // setGraphs(JSON.parse(data));
+      setGraphs(data.graphs);
+      console.log("data", data.graphs);
+      console.log("graphs", graphs);
+    }
+    catch (error) {
+      console.error('Error retrieving data:', error);
     }
   }
 
@@ -37,10 +36,10 @@ const Grid = () => {
   }, []);
 
   const [layout, setLayout] = useState([
-    { i: '1', x: 0, y: 0, w: 1, h: 1 },
-    { i: '2', x: 1, y: 0, w: 1, h: 1 },
-    { i: '3', x: 0, y: 1, w: 1, h: 1 },
-    { i: '4', x: 1, y: 1, w: 1, h: 1 },
+    { i: '0', x: 0, y: 0, w: 1, h: 1 },
+    { i: '1', x: 1, y: 0, w: 1, h: 1 },
+    { i: '2', x: 0, y: 1, w: 1, h: 1 },
+    { i: '3', x: 1, y: 1, w: 1, h: 1 },
   ]);
 
   const onLayoutChange = (newLayout) => {
@@ -60,7 +59,7 @@ const Grid = () => {
         // const itemData = data.find(item => item.i === curr.i);
         return (
           <div key={curr.i}>
-            <Widget graphData={graphs}/>
+            <Widget graphData={graphs[curr.i]}/>
           </div>
         )
       })}
