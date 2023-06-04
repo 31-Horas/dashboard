@@ -37,7 +37,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/welcome" element={isLoggedIn ? <Navigate to="/"/> : <Welcome/>}/>
+        <Route path="/welcome" element={isLoggedIn ? <Welcome/>: <Navigate to="/"/>}/>
         <Route path="/signup" element={<SignupForm />}/>
         <Route path="/json" component={JsonPage} />
       </Routes>
