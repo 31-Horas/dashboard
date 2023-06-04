@@ -10,7 +10,7 @@ import axios from 'axios';
 // import { TroubleshootRounded } from '@mui/icons-material';
 
 function isLoggedIn(){
-  axios.get('http://localhost:5000/auth/signin')
+  axios.get('http://otterboard.me:5000/auth/signin')
     .then(response => {
       // Handle the response from the backend
       if (response.status === 201) {

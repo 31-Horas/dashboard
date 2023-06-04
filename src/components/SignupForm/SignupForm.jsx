@@ -57,7 +57,7 @@ const SignupForm = () => {
             setPasswordError(true);
             return; // Stop form submission if password is invalid
         }
-        const response = await axios.post('http://localhost:5000/auth/signup', { email: email, password: password });
+        const response = await axios.post('http://otterboard.me:5000/auth/signup', { email: email, password: password });
         // Handle the response from the backend
         if (response.status === 202) {
             //navigates to dashboard

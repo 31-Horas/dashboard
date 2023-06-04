@@ -8,7 +8,7 @@ const Welcome = () => {
     const navigate = useNavigate();
     useEffect(() => {
         // Send Axios GET request to verify if the user is logged in
-        axios.get('http://localhost:5000/auth/signin')
+        axios.get('http://otterboard.me:5000/auth/signin')
             .then(response => {
                 // Handle the response from the backend
                 if (response.status === 201) {
