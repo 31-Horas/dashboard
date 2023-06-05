@@ -78,10 +78,10 @@ const LoginForm = () => {
             //navigates to dashboard
             navigate("/welcome");
             // File was successfully uploaded
-            console.log('Login successful');
-        } else {
+            console.log(response.data);
+        } else if (response.status === 401) {
             // File upload failed
-            console.log('Login failed');
+            console.log(response.data);
         }
     };
 

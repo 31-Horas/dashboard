@@ -12,14 +12,13 @@ import Topbar from './components/Topbar/Topbar'
 async function isLoggedIn() {
   try {
     const response = await axios.get('http://localhost:5000/auth/signin', { withCredentials: true });
-
     if (response.status === 200) {
       // User is already logged in
-      console.log('Already logged in');
+      console.log(response.data);
       return true;
     } else if (response.status === 202) {
       // User is not logged in, redirect to the login page
-      console.log('Not logged in, redirecting to login');
+      console.log(response.data);
       return false;
     }
   } catch (error) {
@@ -29,14 +28,23 @@ async function isLoggedIn() {
 }
 
 
-
 function App() {
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
+  React.useEffect(() => {
+    isLoggedIn().then(result => {
+      setLoggedIn(result);
+    });
+  }, []);
+
+  console.log(loggedIn);  
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={isLoggedIn ? <Navigate to="/welcome"/> : <LoginForm />} />
-        <Route path="/dashboard" element={isLoggedIn ? <Dashboard/>: <Navigate to="/"/>} />
-        <Route path="/welcome" element={isLoggedIn ? <Welcome/>: <Navigate to="/"/>}/>
+        <Route path="/" element={loggedIn ? <Navigate to="/welcome" />: <LoginForm />} />
+        <Route path="/dashboard" element={loggedIn ? <Dashboard/>: <Navigate to="/"/>} />
+        <Route path="/welcome" element={loggedIn ? <Welcome/>: <Navigate to="/"/>}/>
         <Route path="/signup" element={<SignupForm />}/>
         <Route path="/json" component={JsonPage} />
         <Route path='/topbartest' element={<Topbar/>} />
@@ -46,3 +54,4 @@ function App() {
 }
 
 export default App;
+

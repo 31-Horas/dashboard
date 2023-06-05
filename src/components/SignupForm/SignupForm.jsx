@@ -64,15 +64,15 @@ const SignupForm = () => {
         if (response.status === 202) {
           // Navigates to dashboard
           navigate("/");
-          console.log('Signup successful');
+          console.log(response.data);
         } 
         else if (response.status === 201) {
           navigate("/");
-          console.log('Email already exists');
+          console.log(response.data);
         }
         else {
           // Signup failed
-          console.log('Signup failed');
+          console.log(response.data);
         }
       };
 

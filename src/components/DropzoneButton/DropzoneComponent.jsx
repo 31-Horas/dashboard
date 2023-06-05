@@ -30,10 +30,10 @@ const DropzoneComponent = ({ onHandle }) => {
           //navigates to dashboard
           navigate("/dashboard")
           // File was successfully uploaded
-          console.log('File uploaded successfully');
+          console.log(response.data);
         } else {
           // File upload failed
-          console.log('File upload failed');
+          console.log(response.data);
         }
       } catch (error) {
         console.log('Error occurred during file upload', error);
