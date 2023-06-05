@@ -8,6 +8,8 @@ import SignupForm from './components/SignupForm/SignupForm';
 import "./App.css"
 import axios from 'axios';
 import Topbar from './components/Topbar/Topbar'
+import { createTheme } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
 
 async function isLoggedIn() {
   try {
@@ -39,7 +41,23 @@ function App() {
 
   console.log(loggedIn);  
 
+  const theme = createTheme({
+    palette: {
+      mode: 'light',
+      primary: {
+          main: '#52AD9C',
+      },
+      secondary: {
+          main: '#9FFCDF',
+      },
+      warning: {
+          main: '#7b2d26',
+      },
+    },
+  })
+
   return (
+    <ThemeProvider theme={theme}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={loggedIn ? <Navigate to="/welcome" />: <LoginForm />} />
@@ -50,6 +68,7 @@ function App() {
         <Route path='/topbartest' element={<Topbar/>} />
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
