@@ -7,7 +7,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import SignupForm from './components/SignupForm/SignupForm';
 import "./App.css"
 import axios from 'axios';
-// import { TroubleshootRounded } from '@mui/icons-material';
+import Topbar from './components/Topbar/Topbar'
 
 function isLoggedIn(){
   axios.get('http://localhost:5000/auth/signin')
@@ -40,6 +40,7 @@ function App() {
         <Route path="/welcome" element={isLoggedIn ? <Welcome/>: <Navigate to="/"/>}/>
         <Route path="/signup" element={<SignupForm />}/>
         <Route path="/json" component={JsonPage} />
+        <Route path='/topbartest' element={<Topbar/>} />
       </Routes>
     </BrowserRouter>
   );

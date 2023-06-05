@@ -19,7 +19,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Grid from './Grid/Grid.jsx';
-import Widget from './Widget/Widget.jsx';
+import Widget from './Widget/Widget';
+import Topbar from './Topbar/Topbar.jsx'
 
 const drawerWidth = 240;
 
