@@ -47,33 +47,34 @@ const SignupForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+      
         if (!emailRegex.test(email)) {
-            setEmailError(true);
-            return; // Stop form submission if email is invalid
+          setEmailError(true);
+          return; // Stop form submission if email is invalid
         }
- 
+      
         if (!passwordRegex.test(password)) {
-            setPasswordError(true);
-            return; // Stop form submission if password is invalid
+          setPasswordError(true);
+          return; // Stop form submission if password is invalid
         }
-        const response = await axios.post('http://localhost:5000/auth/signup', { email: email, password: password });
+      
+        const response = await axios.post('http://localhost:5000/auth/signup', { email: email, password: password }, { withCredentials: true });
+      
         // Handle the response from the backend
         if (response.status === 202) {
-            //navigates to dashboard
-            navigate("/")
-            // File was successfully uploaded
-            console.log('Signup successful');
-          } 
-          if (response.status === 201){
-            navigate("/")
-            console.log('Email already exists');
-          }
-          else {
-            // File upload failed
-            console.log('Signup failed');
-          }
-    };
+          // Navigates to dashboard
+          navigate("/");
+          console.log('Signup successful');
+        } 
+        else if (response.status === 201) {
+          navigate("/");
+          console.log('Email already exists');
+        }
+        else {
+          // Signup failed
+          console.log('Signup failed');
+        }
+      };
 
     return (
         <div className="login-form">

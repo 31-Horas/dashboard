@@ -22,6 +22,7 @@ const DropzoneComponent = ({ onHandle }) => {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
+          withCredentials: true // Enable sending and receiving cookies
         });
   
         // Handle the response from the backend

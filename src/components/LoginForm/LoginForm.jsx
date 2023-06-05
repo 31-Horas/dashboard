@@ -65,18 +65,26 @@ const LoginForm = () => {
           return; // Stop form submission if password is invalid
         }
       
-        const response = await axios.post('http://localhost:5000/auth/signin', { email: email, password: password, remember: rememberMe});
-        // Handle the response from the backend
+        const response = await axios.post('http://localhost:5000/auth/signin', {
+            email: email,
+            password: password,
+            remember: rememberMe
+        }, {
+            withCredentials: true // Enable sending and receiving cookies
+        });
+
+            // Handle the response from the backend
         if (response.status === 200) {
             //navigates to dashboard
-            navigate("/welcome")
+            navigate("/welcome");
             // File was successfully uploaded
             console.log('Login successful');
         } else {
             // File upload failed
             console.log('Login failed');
         }
-      };
+    };
+
 
     return (
         <div className="login-form">
@@ -187,4 +195,3 @@ const LoginForm = () => {
 }
 
 export default LoginForm;
-
