@@ -21,13 +21,13 @@ const Topbar = () => {
     };
 
     return (
-        <Box sx={{ display: "flex", flexDirection:'space-between', flexGrow: 3 }}>
+        <Box sx={{ display: "flex", flexDirection:'space-between', flexGrow: 1 }}>
             <AppBar>
-                <Toolbar>
-                    <Typography variant="h6" noWrap component="div">
+                <Toolbar >
+                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
                         OTTERBOARD
                     </Typography>
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box>
                         <Tooltip title="logout">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <AccountCircleIcon/>
