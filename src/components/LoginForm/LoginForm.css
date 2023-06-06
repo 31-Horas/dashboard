@@ -38,8 +38,16 @@ form {
     margin-top: 20px;
 }
   
+.belowFields {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: "space-between";
+}
+
 .forgot-password {
     margin-top: 15px;
+    margin-right: 0px;
 }
   
 .forgot-password a {

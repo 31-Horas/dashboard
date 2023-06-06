@@ -18,34 +18,16 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
 
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-
     const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    // Validate email and password
-    const emailRegex = /^\S+@\S+\.\S+$/;
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/; // At least 8 characters, one letter, and one number
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
-
-        if (!emailRegex.test(email)) {
-            setEmailError(true);
-        } else {
-            setEmailError(false); // Reset email error state on change
-        }
     };
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
-
-        if (!passwordRegex.test(password)) {
-            setPasswordError(true);
-        } else{
-            setPasswordError(false); // Reset password error state on change
-        }
     };
 
     const handleCheckBoxChange = (event) => {
@@ -55,16 +37,6 @@ const LoginForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
       
-        if (!emailRegex.test(email)) {
-          setEmailError(true);
-          return; // Stop form submission if email is invalid
-        }
-      
-        if (!passwordRegex.test(password)) {
-          setPasswordError(true);
-          return; // Stop form submission if password is invalid
-        }
-      
         const response = await axios.post('http://localhost:5000/auth/signin', {
             email: email,
             password: password,
@@ -72,7 +44,6 @@ const LoginForm = () => {
         }, {
             withCredentials: true // Enable sending and receiving cookies
         });
-
             // Handle the response from the backend
         if (response.status === 200) {
             //navigates to dashboard
@@ -95,53 +66,27 @@ const LoginForm = () => {
             <form onSubmit={handleSubmit}>
                 {/* mail input/error */}
                 <div className="input-container">
-                    {emailError && (
-                        <TextField
-                            className='input-container'
-                            fullWidth
-                            autoFocus
-                            error
-                            helperText="not a valid email."
-                            variant='outlined'
-                            type='text'
-                            label='Email'
-                            size="small"
-                            value={email}
-                            onChange={handleEmailChange}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <MailOutlinedIcon/>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                    )}
-                    {!emailError && (
-                        <TextField
-                            className='input-container'
-                            fullWidth
-                            autoFocus
-                            variant='outlined'
-                            type='text'
-                            label='Email'
-                            size="small"
-                            value={email}
-                            onChange={handleEmailChange}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <MailOutlinedIcon/>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                    )}
+                    <TextField
+                        className='input-container'
+                        fullWidth
+                        autoFocus
+                        variant='outlined'
+                        type='text'
+                        label='Email'
+                        size="small"
+                        value={email}
+                        onChange={handleEmailChange}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <MailOutlinedIcon/>
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
                 </div>
 
-                 
-                {/* Password input */}
-                
+                {/* Password input */}                
                 <div className="input-container">
                     <TextField
                         fullWidth
@@ -166,7 +111,7 @@ const LoginForm = () => {
                     />
                 </div>
                 
-                <Box display="flex">
+                <Box className="belowFields">
                     <div>
                         <FormGroup>
                             <FormControlLabel control={<Checkbox checked={rememberMe} onChange={handleCheckBoxChange} />} label="Remember me" />
