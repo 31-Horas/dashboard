@@ -52,7 +52,7 @@ const Widget = ({ graphData }) => {
           Random Graph
         </Typography>
         {/* <BarChart data={data}/> */}
-        <LineChart data={data}/>
+        <LineChart data={data2}/>
         {/* <Typography variant="body2" color="text.secondary">
           {JSON.stringify(graphData)}
         </Typography> */}

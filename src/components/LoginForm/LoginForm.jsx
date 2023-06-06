@@ -59,7 +59,7 @@ const LoginForm = () => {
 
     return (
         <div className="login-form">
-            <div className="logo"></div>
+            <div className="logo-login"></div>
             <Typography variant="h4">
                 Welcome to OtterBoard!
             </Typography>
