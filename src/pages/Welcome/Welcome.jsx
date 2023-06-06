@@ -6,7 +6,9 @@ import Topbar from '../../components/Topbar/Topbar';
 import { Typography } from '@mui/material';
 
 const Welcome = () => {
+
     usePageRender('/');
+
     function handleDrop(file) {
         console.log('File selected:', file);
     }

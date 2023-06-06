@@ -60,6 +60,7 @@ const SignupForm = () => {
       
         const response = await axios.post('http://localhost:5000/auth/signup', { email: email, password: password }, { withCredentials: true });
       
+
         // Handle the response from the backend
         if (response.status === 202) {
           // Navigates to dashboard

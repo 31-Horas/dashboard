@@ -18,7 +18,7 @@ const DropzoneComponent = ({ onHandle }) => {
         formData.append('file', droppedFile);
   
         // Send the file using Axios
-        const response = await axios.post('http://localhost:5000/bucket/upload', formData, {
+        const response = await axios.post('http://otterboard.me:5000/bucket/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
