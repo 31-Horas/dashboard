@@ -16,15 +16,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import Grid from './Grid/Grid.jsx';
 import { Avatar, Tooltip, Menu, MenuItem } from '@mui/material';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { LogoutOutlined } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlined';
+import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 
 const drawerWidth = 240;
 
@@ -193,28 +193,87 @@ const MiniDrawer = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Profile'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
+          {/* dashboard */}
+          <ListItem disablePadding sx={{display: 'block'}}>
+            <ListItemButton 
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}>
+                <ListItemIcon 
                   sx={{
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <SpaceDashboardOutlinedIcon/>
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+                <ListItemText primary='Dashboard' sx={{ opacity: open ? 1 : 0 }}/>
+            </ListItemButton>
+          </ListItem>
+          {/* file history */}
+          <ListItem disablePadding sx={{display: 'block'}}>
+            <ListItemButton 
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}>
+                <ListItemIcon 
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FolderOutlinedIcon/>
+                </ListItemIcon>
+                <ListItemText primary='File History' sx={{ opacity: open ? 1 : 0 }}/>
+            </ListItemButton>
+          </ListItem>
+          {/* upload new file */}
+          <ListItem disablePadding sx={{display: 'block'}}>
+            <ListItemButton 
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}>
+                <ListItemIcon 
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FileUploadOutlinedIcon/>
+                </ListItemIcon>
+                <ListItemText primary='File History' sx={{ opacity: open ? 1 : 0 }}/>
+            </ListItemButton>
+          </ListItem>
+          {/* Profile */}
+          <ListItem disablePadding sx={{display: 'block'}}>
+            <ListItemButton 
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}>
+                <ListItemIcon 
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <AccountCircleOutlinedIcon/>
+                </ListItemIcon>
+                <ListItemText primary='File History' sx={{ opacity: open ? 1 : 0 }}/>
+            </ListItemButton>
+          </ListItem>
+          
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
