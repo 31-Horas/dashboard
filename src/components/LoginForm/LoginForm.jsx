@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
-import { Button, FormGroup, Box } from "@mui/material";
+import { Button, FormGroup, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -89,7 +89,9 @@ const LoginForm = () => {
     return (
         <div className="login-form">
             <div className="logo"></div>
-            <h1>Welcome to OtterBoard!</h1>
+            <Typography variant="h4">
+                Welcome to OtterBoard!
+            </Typography>
             <form onSubmit={handleSubmit}>
                 {/* mail input/error */}
                 <div className="input-container">
@@ -178,9 +180,11 @@ const LoginForm = () => {
                 {/* Login button */}
                 <div className="login-button">
                     <Button 
+                        className="login-button"
+                        fullWidth
                         variant="contained"
                         color="primary"
-                        size="medium"
+                        size="large"
                         onClick={handleSubmit}
                     >
                         Login
@@ -188,7 +192,11 @@ const LoginForm = () => {
                 </div>
             </form>
             <div className="bottom">
-                <a className="sign-up" href="/signup">Sign up</a>
+                <a className="sign-up" href="/signup">
+                    <Typography variant="h6" mb={1}>
+                        Sign-up
+                    </Typography>
+                </a>
             </div>
         </div>
     );

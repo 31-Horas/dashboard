@@ -27,6 +27,7 @@ form {
     padding-top: 25px;
     align-items: center;
     justify-content: center;
+    width: 50%;
 }
   
 .google-button {
@@ -51,15 +52,15 @@ form {
 }
 
 .bottom{
-    display: flex;
-    color: #007bff;
-    text-decoration: none;
+    position: absolute;
+    bottom: 10px;
+    
 }
+
 .sign-up{
     color: #007bff;
     text-decoration: none;
     margin-top: 5px;
-    align-self: flex-end;
 }
 
 .sign-up:hover{
