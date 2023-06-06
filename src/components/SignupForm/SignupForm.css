@@ -1,67 +1,44 @@
+.background-signup {
+    background-color: #52AD9C;
+}
+
+.paper-signup {
+    display: flex;
+    align-self: center;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    background-color: #52AD9C;
+}
+
 .login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-color: #f2f2f2;
     font-family: Arial, sans-serif;
-    width: 100%;
+    background-color: #f2f2f2;
 }
   
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
 
 .input-container{
     padding-top: 15px;
     width: 50%;
 }
 
-.login-button{
+.signup-button{
     display: flex;
     padding-top: 25px;
     align-items: center;
     justify-content: center;
-}
-  
-.google-button {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-}
-  
-.forgot-password {
-    margin-top: 5px;
-}
-  
-.forgot-password a {
-    color: #007bff;
-    text-decoration: none;
-}
-  
-.forgot-password a:hover {
-    text-decoration: underline;
+    width: 50%;
 }
 
-.bottom{
-    display: flex;
-    color: #007bff;
-    text-decoration: none;
-}
-.sign-up{
-    color: #007bff;
-    text-decoration: none;
-    margin-top: 5px;
-    align-self: flex-end;
-}
-
-.sign-up:hover{
-    text-decoration: underline;
+.logo-signup {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 150px;
+    /* margin-bottom: 2rem; */
 }

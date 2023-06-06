@@ -135,6 +135,7 @@ const LoginForm = () => {
                         color="primary"
                         size="large"
                         onClick={handleSubmit}
+                        sx={{":hover": {backgroundColor: "#9FFCDF"}}}
                     >
                         Login
                     </Button>
