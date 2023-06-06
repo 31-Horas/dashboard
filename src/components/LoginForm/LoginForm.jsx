@@ -118,7 +118,11 @@ const LoginForm = () => {
                         </FormGroup>
                     </div>
                     <div className="forgot-password">
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Forgot your password?</a>
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                            <Typography variant="h8">
+                                Forgot your password?
+                            </Typography>
+                        </a>
                     </div>
                 </Box>
                 
