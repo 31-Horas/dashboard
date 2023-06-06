@@ -2,8 +2,10 @@ import React from 'react';
 import './Welcome.css' 
 import DropzoneComponent from '../../components/DropzoneButton/DropzoneComponent';
 import Topbar from '../../components/Topbar/Topbar'
+import usePageRender from '../../components/usePageRender'
 
 const Welcome = () => {
+    usePageRender('/');
     function handleDrop(file) {
         console.log('File selected:', file);
     }
