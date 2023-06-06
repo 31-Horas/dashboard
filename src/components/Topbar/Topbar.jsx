@@ -36,8 +36,8 @@ const Topbar = () => {
         <Box sx={{ display: "flex", flexDirection:'space-between', flexGrow: 1 }}>
             <AppBar>
                 <Toolbar >
-                    <Avatar alt="OTTERBOARD" src="../../public/otter.jpg" />
-                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+                    <Avatar alt="OTTERBOARD" src="otter.jpg" sx={{marginLeft: 2, marginRight: 2}}/>
+                    <Typography variant="h5" noWrap component="div" sx={{ flexGrow: 1 }}>
                         OTTERBOARD
                     </Typography>
                     <Box>
