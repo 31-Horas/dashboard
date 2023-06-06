@@ -1,9 +1,10 @@
 import React from "react";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { AppBar, IconButton, Toolbar, Typography, Box, Menu, Tooltip } from "@mui/material";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { AppBar, IconButton, Toolbar, Typography, Box, Menu, Tooltip, Icon } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { MenuItem } from "react-pro-sidebar";
 import axios from "axios";
+import { LogoutOutlined } from "@mui/icons-material";
 
 const Topbar = () => {
     const navigate = useNavigate();
@@ -40,8 +41,8 @@ const Topbar = () => {
                     </Typography>
                     <Box>
                         <Tooltip title="logout">
-                            <IconButton onClick={LogOutFunction} sx={{ p: 0 }}>
-                                <AccountCircleIcon/>
+                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                <AccountCircleOutlinedIcon/>
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -61,7 +62,10 @@ const Topbar = () => {
                         onClose={handleCloseUserMenu}
                         >
                             <MenuItem onClick={LogOutFunction}>
-                                <Typography textAlign="center">logout</Typography>
+                                <IconButton>
+                                <LogoutOutlined/>
+                                <Typography textAlign="center" variant="button">logout</Typography>
+                                </IconButton>
                             </MenuItem>
                         </Menu>
                     </Box>

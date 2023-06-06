@@ -1,7 +1,3 @@
-body{
-    background-color: #f2f2f2;
-}
-
 .launch-screen {
     height: 100vh;
     display: flex;
@@ -10,7 +6,7 @@ body{
 }
   
 .background {
-    border-radius: 25px;
+    /* border-radius: 25px; */
     background-image: url('https://cdn.discordapp.com/attachments/1074703087278755850/1102815137565515786/800px-Sea_Otter_28Enhydra_lutris29_282516979052429_crop.png');
     background-size: cover;
     background-position: center;
@@ -23,13 +19,15 @@ body{
 }
   
 .content{
+    display: flex;
+    flex-direction: column;
     text-align: left;
     z-index: 1;
     width: 50%;
     padding: 2rem;
 }
   
-.logo {
+.logo-welcome {
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg');
     background-size: contain;
     background-repeat: no-repeat;
@@ -48,7 +46,6 @@ body{
     font-size: 1.5rem;
     margin-top: 0;
     margin-bottom: 2rem;
-    max-width: 500px;
 }
 
   

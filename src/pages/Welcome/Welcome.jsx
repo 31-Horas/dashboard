@@ -1,8 +1,9 @@
 import React from 'react';
 import './Welcome.css' 
 import DropzoneComponent from '../../components/DropzoneButton/DropzoneComponent';
-import Topbar from '../../components/Topbar/Topbar'
 import usePageRender from '../../components/usePageRender'
+import Topbar from '../../components/Topbar/Topbar';
+import { Typography } from '@mui/material';
 
 const Welcome = () => {
     usePageRender('/');
@@ -12,12 +13,16 @@ const Welcome = () => {
 
     return(
         <div className="welcome-screen">
-          <Topbar></Topbar>
+          <Topbar/>
             <div className="background"></div>
             <div className="content">   
-                <div className="logo"></div>
-                <h1 className="title">Welcome to OTTERBOARD</h1>
-                <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div className="logo-welcome"></div>
+                <Typography variant="h1" className="title">Welcome to OTTERBOARD</Typography>
+                <div className='description'>
+                    <Typography variant='h6'>
+                        Upload or choose a file to launch the dashboard.
+                    </Typography>
+                </div>
                 <DropzoneComponent onHandle={handleDrop}/>
             </div>
         </div>

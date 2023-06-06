@@ -6,7 +6,6 @@ import JsonPage from './pages/JsonPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import SignupForm from './components/SignupForm/SignupForm';
 import "./App.css"
-import Topbar from './components/Topbar/Topbar'
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 
@@ -49,7 +48,8 @@ function App() {
         <Route path="/welcome" element={<Welcome/>}/>
         <Route path="/signup" element={<SignupForm />}/>
         <Route path="/json" component={JsonPage} />
-        <Route path='/topbartest' element={<Topbar/>} />
+        <Route path='/welcometest' element={<Welcome/>} />
+        <Route path='dashboardtest' element={<Dashboard/>}/>
       </Routes>
     </BrowserRouter>
     </ThemeProvider>
