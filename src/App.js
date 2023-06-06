@@ -1,48 +1,61 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
-import LoginForm from './pages/Login/Login';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import Login from './pages/Login/Login';
 import Welcome from './pages/Welcome/Welcome';
 import JsonPage from './pages/JsonPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import SignupForm from './components/SignupForm/SignupForm';
 import "./App.css"
-import axios from 'axios';
-// import { TroubleshootRounded } from '@mui/icons-material';
 
-function isLoggedIn(){
-  axios.get('http://otterboard.me:5000/auth/signin')
-    .then(response => {
-      // Handle the response from the backend
-      if (response.status === 201) {
-        // User is already logged in
-        console.log('Already logged in');
-        return true;
-      } else if (response.status === 202) {
-        // User is not logged in, redirect to the login page
-        // navigate("/");
-        console.log('Not logged in, redirecting to login');
-        return false;
-      }
-    })
-    .catch(error => {
-      // Handle any errors that occur during the request
-      console.error('Error checking login status:', error);
-    });
-}
-
+import { createTheme } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      mode: 'light',
+      primary: {
+          main: '#52AD9C',
+      },
+      secondary: {
+          main: '#9FFCDF',
+      },
+      warning: {
+          main: '#7b2d26',
+      },
+    },
+    typography: {
+      fontFamily: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(','),
+    },
+  })
+
   return (
+    <ThemeProvider theme={theme}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginForm />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/welcome" element={isLoggedIn ? <Welcome/>: <Navigate to="/"/>}/>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/welcome" element={<Welcome/>}/>
         <Route path="/signup" element={<SignupForm />}/>
         <Route path="/json" component={JsonPage} />
+        <Route path='/welcometest' element={<Welcome/>} />
+        <Route path='dashboardtest' element={<Dashboard/>}/>
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
 export default App;
+

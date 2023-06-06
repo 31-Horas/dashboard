@@ -8,17 +8,13 @@ import Typography from '@mui/material/Typography';
 import BarChart from '../BarChart/BarChart';
 import { Line } from "react-chartjs-2";
 import LineChart from "../LineChart/LineChart"
+import { GraphicEqSharp } from '@mui/icons-material';
 
 const Widget = ({ graphData }) => {
 
-  console.log(graphData);
+  console.log("graphdata", graphData);
 
-  const data = [
-    {quarter: 1, earnings: 13000},
-    {quarter: 2, earnings: 16500},
-    {quarter: 3, earnings: 14250},
-    {quarter: 4, earnings: 19000}
-  ];
+  const data = graphData;
 
   const data2 = {
     type: 'bar',

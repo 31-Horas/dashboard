@@ -27,6 +27,7 @@ form {
     padding-top: 25px;
     align-items: center;
     justify-content: center;
+    width: 50%;
 }
   
 .google-button {
@@ -37,8 +38,11 @@ form {
     margin-top: 20px;
 }
   
-.forgot-password {
-    margin-top: 15px;
+.belowFields {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: "space-between";
 }
   
 .forgot-password a {
@@ -51,17 +55,25 @@ form {
 }
 
 .bottom{
-    display: flex;
-    color: #007bff;
-    text-decoration: none;
+    position: absolute;
+    bottom: 10px;
 }
+
 .sign-up{
     color: #007bff;
     text-decoration: none;
     margin-top: 5px;
-    align-self: flex-end;
 }
 
 .sign-up:hover{
     text-decoration: underline;
+}
+
+.logo-login {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 150px;
+    /* margin-bottom: 2rem; */
 }

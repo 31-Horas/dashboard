@@ -4,7 +4,7 @@ import './OtterAnimation.css'
 function OtterAnimation() {
   return (
     <div className='video-container'>
-      <video className='video-player' src='OtterLoop.mp4' autoPlay loop muted>
+      <video className='video-player' src='otter.mp4' autoPlay loop muted>
 
       </video>
     </div>

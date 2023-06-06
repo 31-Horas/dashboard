@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
-import { Button, FormGroup, Box } from "@mui/material";
+import { Button, FormGroup, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -18,34 +18,16 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
 
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-
     const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    // Validate email and password
-    const emailRegex = /^\S+@\S+\.\S+$/;
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/; // At least 8 characters, one letter, and one number
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
-
-        if (!emailRegex.test(email)) {
-            setEmailError(true);
-        } else {
-            setEmailError(false); // Reset email error state on change
-        }
     };
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
-
-        if (!passwordRegex.test(password)) {
-            setPasswordError(true);
-        } else{
-            setPasswordError(false); // Reset password error state on change
-        }
     };
 
     const handleCheckBoxChange = (event) => {
@@ -55,83 +37,56 @@ const LoginForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
       
-        if (!emailRegex.test(email)) {
-          setEmailError(true);
-          return; // Stop form submission if email is invalid
-        }
-      
-        if (!passwordRegex.test(password)) {
-          setPasswordError(true);
-          return; // Stop form submission if password is invalid
-        }
-      
-        const response = await axios.post('http://otterboard.me:5000/auth/signin', { email: email, password: password, remember: rememberMe});
-        // Handle the response from the backend
+        const response = await axios.post('http://localhost:5000/auth/signin', {
+            email: email,
+            password: password,
+            remember: rememberMe
+        }, {
+            withCredentials: true // Enable sending and receiving cookies
+        });
+            // Handle the response from the backend
         if (response.status === 200) {
             //navigates to dashboard
-            navigate("/welcome")
+            navigate("/welcome");
             // File was successfully uploaded
-            console.log('Login successful');
-        } else {
+            console.log(response.data);
+        } else if (response.status === 401) {
             // File upload failed
-            console.log('Login failed');
+            console.log(response.data);
         }
-      };
+    };
+
 
     return (
         <div className="login-form">
-            <div className="logo"></div>
-            <h1>Welcome to OtterBoard!</h1>
+            <div className="logo-login"></div>
+            <Typography variant="h4">
+                Welcome to OtterBoard!
+            </Typography>
             <form onSubmit={handleSubmit}>
                 {/* mail input/error */}
                 <div className="input-container">
-                    {emailError && (
-                        <TextField
-                            className='input-container'
-                            fullWidth
-                            autoFocus
-                            error
-                            helperText="not a valid email."
-                            variant='outlined'
-                            type='text'
-                            label='Email'
-                            size="small"
-                            value={email}
-                            onChange={handleEmailChange}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <MailOutlinedIcon/>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                    )}
-                    {!emailError && (
-                        <TextField
-                            className='input-container'
-                            fullWidth
-                            autoFocus
-                            variant='outlined'
-                            type='text'
-                            label='Email'
-                            size="small"
-                            value={email}
-                            onChange={handleEmailChange}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <MailOutlinedIcon/>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                    )}
+                    <TextField
+                        className='input-container'
+                        fullWidth
+                        autoFocus
+                        variant='outlined'
+                        type='text'
+                        label='Email'
+                        size="small"
+                        value={email}
+                        onChange={handleEmailChange}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <MailOutlinedIcon/>
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
                 </div>
 
-                 
-                {/* Password input */}
-                
+                {/* Password input */}                
                 <div className="input-container">
                     <TextField
                         fullWidth
@@ -156,23 +111,29 @@ const LoginForm = () => {
                     />
                 </div>
                 
-                <Box display="flex">
+                <Box className="belowFields">
                     <div>
                         <FormGroup>
                             <FormControlLabel control={<Checkbox checked={rememberMe} onChange={handleCheckBoxChange} />} label="Remember me" />
                         </FormGroup>
                     </div>
                     <div className="forgot-password">
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Forgot your password?</a>
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                            <Typography variant="h8">
+                                Forgot your password?
+                            </Typography>
+                        </a>
                     </div>
                 </Box>
                 
                 {/* Login button */}
                 <div className="login-button">
                     <Button 
+                        className="login-button"
+                        fullWidth
                         variant="contained"
                         color="primary"
-                        size="medium"
+                        size="large"
                         onClick={handleSubmit}
                     >
                         Login
@@ -180,11 +141,14 @@ const LoginForm = () => {
                 </div>
             </form>
             <div className="bottom">
-                <a className="sign-up" href="/signup">Sign up</a>
+                <a className="sign-up" href="/signup">
+                    <Typography variant="h6" mb={1}>
+                        Sign-up
+                    </Typography>
+                </a>
             </div>
         </div>
     );
 }
 
 export default LoginForm;
-
