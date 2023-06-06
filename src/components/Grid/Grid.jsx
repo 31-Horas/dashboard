@@ -33,7 +33,7 @@ const Grid = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [])
 
   const [layout, setLayout] = useState([
     { i: '0', x: 0, y: 0, w: 1, h: 1 },
@@ -50,15 +50,16 @@ const Grid = () => {
     <GridLayout
       className="layout"
       layout={layout}
-      cols={4}
-      rowHeight={400}
+      cols={3}
+      rowHeight={310}
       width={window.innerWidth}
       onLayoutChange={onLayoutChange}
+      isResizable={false}
     >
       {layout.map((curr) => {
         // const itemData = data.find(item => item.i === curr.i);
         return (
-          <div key={curr.i}>
+          <div key={curr.i} className='widget-style'>
             <Widget graphData={graphs[curr.i]}/>
           </div>
         )
