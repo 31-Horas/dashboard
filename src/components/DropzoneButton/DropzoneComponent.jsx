@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import './Dropzone.css';
 import { useNavigate } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
 
 const DropzoneComponent = ({ onHandle }) => {
@@ -57,7 +58,11 @@ const DropzoneComponent = ({ onHandle }) => {
                   {file ? (
                       <p>File name: {file.name}</p>
                   ) : (
-                      <div className="cta-button">Drag and drop a CSV file here, or click to select a CSV file</div>
+                    <div className='cta-button'>
+                      <Typography variant='h6'>
+                        Drag and drop a CSV file here, or click to select a CSV file
+                      </Typography>
+                    </div>
                   )}
               </div>
           )}
