@@ -8,7 +8,7 @@ function usePageRender(navigationPath) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/auth/signin', {
+        const response = await axios.get('http://otterboard.me:5000/auth/signin', {
           withCredentials: true // Enable sending and receiving cookies
         });
 
