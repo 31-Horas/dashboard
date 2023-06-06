@@ -19,8 +19,12 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Grid from './Grid/Grid.jsx';
-import Widget from './Widget/Widget';
-import Topbar from './Topbar/Topbar.jsx'
+import { Avatar, Tooltip, Menu, MenuItem } from '@mui/material';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { LogoutOutlined } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const drawerWidth = 240;
 
@@ -90,6 +94,33 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const MiniDrawer = () => {
+
+  //need it for logout
+  const navigate = useNavigate();
+  async function LogOutFunction() {
+    try {
+      const response = await axios.get('http://localhost:5000/auth/logout', { withCredentials: true });
+        
+      if (response.status === 200) {
+        navigate("/");
+        console.log(response.data);
+        return true;}
+      } catch (error) {
+        // Handle any errors that occur during the request
+        console.error('Error checking login status:', error);
+      }
+  }
+
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+      
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -118,9 +149,40 @@ const MiniDrawer = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Avatar alt="OTTERBOARD" src="otter.jpg" sx={{marginLeft: 0, marginRight: 2}}/>
+          <Typography variant="h5" noWrap component="div" sx={{ flexGrow: 1 }}>
             OTTERBOARD
           </Typography>
+          <Box>
+            <Tooltip title="logout">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <AccountCircleOutlinedIcon/>
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              <MenuItem onClick={LogOutFunction}>
+                <IconButton>
+                  <LogoutOutlined/>
+                  <Typography textAlign="center" variant="button">logout</Typography>
+                </IconButton>
+              </MenuItem>
+            </Menu>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
