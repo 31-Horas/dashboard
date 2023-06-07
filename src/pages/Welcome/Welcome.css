@@ -32,6 +32,7 @@
     align-items: left;
     z-index: 1;
     padding: 2rem;
+    width: 100%;
 }
   
 .logo-welcome {

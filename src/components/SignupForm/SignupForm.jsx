@@ -88,9 +88,6 @@ const SignupForm = () => {
                 <Typography variant="h4" margin={10}>
                     Join the OTTERBOARD family!
                 </Typography>
-                <Typography variant="h5">
-                    Sign up
-                </Typography>
                 <form onSubmit={handleSubmit}>
         
                     {/* mail input/error */}
