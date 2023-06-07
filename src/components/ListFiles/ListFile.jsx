@@ -100,7 +100,7 @@ function ConfirmationDialogRaw(props) {
     value: PropTypes.string.isRequired,
   };
   
-const ListFile = () => {
+const ListFile = (props) => {
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState('no file selected');
   
@@ -114,7 +114,9 @@ const ListFile = () => {
         if (newValue) {
             setValue(newValue);
         }
+        props.func(value);
     };
+
   
     return (
         <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>

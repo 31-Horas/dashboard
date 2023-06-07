@@ -5,7 +5,6 @@ import usePageRender from '../../components/usePageRender'
 import Topbar from '../../components/Topbar/Topbar';
 import { Typography } from '@mui/material';
 import ListFile from '../../components/ListFiles/ListFile';
-import Box from '@mui/material/Box';
 
 const Welcome = () => {
 
@@ -13,6 +12,10 @@ const Welcome = () => {
 
     function handleDrop(file) {
         console.log('File selected:', file);
+    }
+
+    const getFileName = (fileFromChild) => {
+        console.log(fileFromChild);
     }
 
     return(
@@ -29,12 +32,8 @@ const Welcome = () => {
                                 Upload or choose a file to launch the dashboard.
                             </Typography>
                         </div>
-                        <ListFile/>
+                        <ListFile func={getFileName}/>
                         <DropzoneComponent onHandle={handleDrop}/>
-                        {/* <Box sx={{display: "flex", flexDirection: "column", alignContent: "center", alignItems: 'center'}}>
-                            <ListFile/>
-                            <DropzoneComponent onHandle={handleDrop}/>
-                        </Box> */}
                     </div>
                 </div>
 
