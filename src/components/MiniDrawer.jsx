@@ -250,7 +250,7 @@ const MiniDrawer = () => {
                 >
                   <FileUploadOutlinedIcon/>
                 </ListItemIcon>
-                <ListItemText primary='File History' sx={{ opacity: open ? 1 : 0 }}/>
+                <ListItemText primary='Upload new file' sx={{ opacity: open ? 1 : 0 }}/>
             </ListItemButton>
           </ListItem>
           {/* Profile */}
@@ -270,7 +270,7 @@ const MiniDrawer = () => {
                 >
                   <AccountCircleOutlinedIcon/>
                 </ListItemIcon>
-                <ListItemText primary='File History' sx={{ opacity: open ? 1 : 0 }}/>
+                <ListItemText primary='Profile' sx={{ opacity: open ? 1 : 0 }}/>
             </ListItemButton>
           </ListItem>
           

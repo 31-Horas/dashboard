@@ -94,11 +94,11 @@ function ConfirmationDialogRaw(props) {
     );
   }
   
-  ConfirmationDialogRaw.propTypes = {
+ConfirmationDialogRaw.propTypes = {    
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
-  };
+};
   
 const ListFile = (props) => {
     const [open, setOpen] = React.useState(false);
