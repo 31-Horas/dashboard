@@ -1,8 +1,15 @@
-.launch-screen {
-    height: 100vh;
+.complete-screen {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.left-screen {
+    width: 50%;
+}
+
+.righ-screen {
+    width: 50%;
 }
   
 .background {
@@ -22,15 +29,18 @@
     display: flex;
     flex-direction: column;
     text-align: left;
+    align-items: left;
     z-index: 1;
-    width: 50%;
     padding: 2rem;
+    width: 100%;
 }
   
 .logo-welcome {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg');
+    /* background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg');
     background-size: contain;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
+    margin-top: 30px;
+    margin-bottom: 0;
     height: 150px;
     width: 150px;
     /* margin-bottom: 2rem; */

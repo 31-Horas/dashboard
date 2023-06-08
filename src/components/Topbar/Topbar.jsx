@@ -1,6 +1,6 @@
 import React from "react";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { AppBar, IconButton, Toolbar, Typography, Box, Menu, Tooltip, Icon } from "@mui/material";
+import { AppBar, IconButton, Toolbar, Typography, Box, Menu, Tooltip, Icon, Avatar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { MenuItem } from "react-pro-sidebar";
 import axios from "axios";
@@ -36,7 +36,8 @@ const Topbar = () => {
         <Box sx={{ display: "flex", flexDirection:'space-between', flexGrow: 1 }}>
             <AppBar>
                 <Toolbar >
-                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+                    <Avatar alt="OTTERBOARD" src="otter.jpg" sx={{marginLeft: 2, marginRight: 2}}/>
+                    <Typography variant="h5" noWrap component="div" sx={{ flexGrow: 1 }}>
                         OTTERBOARD
                     </Typography>
                     <Box>

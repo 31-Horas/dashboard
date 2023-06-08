@@ -1,17 +1,18 @@
 /* Styles for the Dropzone component */
 
+
 .cta-button {
     border: 2px dashed #0f11109e ;
     font-size: 1.5rem;
-    background-color: #006699;
-    color: white;
+    background-color: #52AD9C;
+    color: black;
     padding: 1rem 2rem;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     width: 80%;
 }
   
 .cta-button:hover {
-    background-color: #007acc;
+    background-color: #9FFCDF;
 }
