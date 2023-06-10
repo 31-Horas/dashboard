@@ -55,7 +55,7 @@ function ConfirmationDialogRaw(props) {
     >
       <DialogTitle>Files</DialogTitle>
       <DialogContent dividers>
-        <RadioGroup
+      <RadioGroup
           ref={radioGroupRef}
           aria-label="files"
           name="files"
@@ -153,7 +153,7 @@ const ListFile = (props) => {
           keepMounted
           open={open}
           onClose={handleClose}
-          value={value}
+          value={Array.isArray(value) ? value : []}
         />
       </List>
     </Box>
