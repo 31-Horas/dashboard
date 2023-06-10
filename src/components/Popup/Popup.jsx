@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-const Popup = ({openState, text, agreeOption, disagreeOption}) => {
+const Popup = ({openState, title, text, agreeOption}) => {
 
     const [open, setOpen] = useState(openState);
 
@@ -28,7 +28,7 @@ const Popup = ({openState, text, agreeOption, disagreeOption}) => {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Use Google's location service?"}
+                    {title}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
@@ -36,7 +36,7 @@ const Popup = ({openState, text, agreeOption, disagreeOption}) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>{disagreeOption}</Button>
+                    {/* <Button onClick={handleClose}>{disagreeOption}</Button> */}
                     <Button onClick={handleClose} autoFocus>
                         {agreeOption}
                     </Button>

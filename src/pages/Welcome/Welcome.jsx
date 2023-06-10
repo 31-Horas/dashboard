@@ -5,6 +5,8 @@ import usePageRender from '../../components/usePageRender'
 import Topbar from '../../components/Topbar/Topbar';
 import { Typography } from '@mui/material';
 import ListFile from '../../components/ListFiles/ListFile';
+import { useState } from 'react';
+import Popup from '../../components/Popup/Popup';
 
 const Welcome = () => {
 
@@ -18,8 +20,20 @@ const Welcome = () => {
         console.log(fileFromChild);
     }
 
+    //popup 
+    const [showPopup, setShowPopup] = useState(true);
+    const title = "This website uses cookies"
+    const popupText = "We use cookies to improve your browsing experience and to securely manage sessions and user accounts on our website. By continuing to use our site, you agree to the use of cookies. ";
+    const agreeOption = "agree";
+    console.log(showPopup);
+
     return(
         <>
+            {showPopup && (
+                <Popup openState={showPopup} title={title} text={popupText} agreeOption={agreeOption}>
+                    {/* {setShowPopup(false)} */}
+                </Popup>
+            )}
             <Topbar/>
         
             <div className='complete-screen'>

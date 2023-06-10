@@ -7,10 +7,11 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import { Button, FormGroup, Box, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useAsyncError, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Popup from "../Popup/Popup";
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -21,6 +22,12 @@ const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const [showPopup, setShowPopup] = useState(false);
+    const title = "Incorrect credentials";
+    const popupText = "Email and / or password incorrect.";
+    const agreeOption = "okay";
+    const disagreeOption = "close"
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -53,12 +60,18 @@ const LoginForm = () => {
         } else if (response.status === 401) {
             // File upload failed
             console.log(response.data);
+            setShowPopup(true);
         }
     };
 
 
     return (
         <div className="login-form">
+            {showPopup && (
+                <Popup openState={showPopup} title={title} text={popupText} agreeOption={agreeOption} disagreeOption={disagreeOption}>
+                    {setShowPopup(false)}
+                </Popup>
+            )}
             <div className="logo-login"></div>
             <Typography variant="h4">
                 Welcome to OtterBoard!
