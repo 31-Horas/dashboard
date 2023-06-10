@@ -62,14 +62,18 @@ function ConfirmationDialogRaw(props) {
           value={value}
           onChange={handleChange}
         >
-          {value.map((file) => (
-            <FormControlLabel
-              value={file}
-              key={file}
-              control={<Radio />}
-              label={file}
-            />
-          ))}
+          {Array.isArray(value) ? (
+            value.map((file) => (
+              <FormControlLabel
+                value={file}
+                key={file}
+                control={<Radio />}
+                label={file}
+              />
+            ))
+          ) : (
+            <Typography>No files found</Typography>
+          )}
         </RadioGroup>
       </DialogContent>
       <DialogActions>
