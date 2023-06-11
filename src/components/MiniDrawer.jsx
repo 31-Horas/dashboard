@@ -25,6 +25,7 @@ import axios from 'axios';
 import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlined';
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import UploadFileDashboard from './UploadFileDashboard/UploadFileDashboard.jsx';
 
 const drawerWidth = 240;
 
@@ -94,6 +95,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const MiniDrawer = () => {
+
+  const [uploadFile, setUploadFile] = React.useState(false);
+
+  const setUploadFileInChild = (value) => {
+    setUploadFile(value);
+    console.log(uploadFile);
+  }
 
   //need it for logout
   const navigate = useNavigate();
@@ -236,6 +244,7 @@ const MiniDrawer = () => {
           {/* upload new file */}
           <ListItem disablePadding sx={{display: 'block'}}>
             <ListItemButton 
+              onClick={() => { setUploadFile(true) }}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -249,6 +258,9 @@ const MiniDrawer = () => {
                   }}
                 >
                   <FileUploadOutlinedIcon/>
+                  {uploadFile && (
+                    <UploadFileDashboard openState={uploadFile} effect={setUploadFileInChild}/>
+                  )}
                 </ListItemIcon>
                 <ListItemText primary='Upload new file' sx={{ opacity: open ? 1 : 0 }}/>
             </ListItemButton>
