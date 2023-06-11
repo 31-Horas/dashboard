@@ -35,6 +35,7 @@ const Grid = () => {
 
   const getData = async () => {
     try {
+      //CHANGE THIS CALL TO THE BACKEND CORRECT ONE
       const { data } = await axios.get('http://localhost:5000/data.json');
       // setGraphs(JSON.parse(data));
       const dataGraphs = data.graphs;
@@ -60,8 +61,6 @@ const Grid = () => {
   console.log('graphs data: ', graphs);
   console.log('graphs lenght: ', graphs.length);
   console.log('layout', layout);
-
-
 
   const onLayoutChange = (newLayout) => {
     setLayout(newLayout);
