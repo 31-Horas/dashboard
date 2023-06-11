@@ -31,7 +31,10 @@ import { useState } from 'react';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DropzoneComponent from './DropzoneButton/DropzoneComponent.jsx';
+import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
 
@@ -139,12 +142,23 @@ const MiniDrawer = () => {
     setOpenFileHistory(false);
   };
 
-  const [uploadFile, setUploadFile] = React.useState(false);
+  //Upload file functionality
+  const [openUploadFile, setOpenUploadFile] = useState(false);
 
-  const setUploadFileInChild = (value) => {
-    setUploadFile(value);
-    console.log(uploadFile);
-  }
+  const handleClickOpenUploadFile = () => {
+    setOpenUploadFile(true);
+  };
+
+  const handleCloseUploadFile = () => {
+    setOpenUploadFile(false);
+  };
+
+  // const [uploadFile, setUploadFile] = React.useState(false);
+
+  // const setUploadFileInChild = (value) => {
+  //   setUploadFile(value);
+  //   console.log(uploadFile);
+  // }
 
   // const [fileHistory, setFileHistory] = React.useState(false);
 
@@ -217,6 +231,27 @@ const MiniDrawer = () => {
             </ListItem>
           ))}
         </List>
+      </Dialog>
+
+      {/* UPLOAD FILE JSX */}
+      <Dialog
+        open={openUploadFile}
+        onClose={handleCloseUploadFile}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Upload a new file
+        </DialogTitle>
+        <DialogContent>
+          <DropzoneComponent/>
+        </DialogContent>
+        <DialogActions>
+          {/* <Button onClick={handleClose}>Cancel</Button> */}
+          <Button onClick={handleCloseUploadFile} autoFocus>
+            Close
+          </Button>
+        </DialogActions>
       </Dialog>
 
       <CssBaseline />
@@ -322,7 +357,7 @@ const MiniDrawer = () => {
           {/* upload new file */}
           <ListItem disablePadding sx={{display: 'block'}}>
             <ListItemButton 
-              onClick={() => { setUploadFile(true) }}
+              onClick={handleClickOpenUploadFile}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -336,15 +371,12 @@ const MiniDrawer = () => {
                   }}
                 >
                   <FileUploadOutlinedIcon/>
-                  {uploadFile && (
-                    <UploadFileDashboard openState={uploadFile} effect={setUploadFileInChild}/>
-                  )}
                 </ListItemIcon>
                 <ListItemText primary='Upload new file' sx={{ opacity: open ? 1 : 0 }}/>
             </ListItemButton>
           </ListItem>
           {/* Profile */}
-          <ListItem disablePadding sx={{display: 'block'}}>
+          {/* <ListItem disablePadding sx={{display: 'block'}}>
             <ListItemButton 
               sx={{
                 minHeight: 48,
@@ -362,7 +394,7 @@ const MiniDrawer = () => {
                 </ListItemIcon>
                 <ListItemText primary='Profile' sx={{ opacity: open ? 1 : 0 }}/>
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
           
         </List>
       </Drawer>
