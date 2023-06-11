@@ -11,9 +11,9 @@ function createLayout(len){
   for(let n = 0; n < len; n++){
     let widget;
     if(n % 2 === 0){
-      widget = {i: `${n}`, x: 0 , y: 0, w: 1, h: 1}
+      widget = {i: `${n}`, x: Math.floor((0 + n) / 3) , y: 0, w: 1, h: 1}
     } else {
-      widget = {i: `${n}`, x: 0 , y: 1, w: 1, h: 1}
+      widget = {i: `${n}`, x:  Math.floor((0 + n) / 3), y: 1, w: 1, h: 1}
     }
     layout.push(widget);
   }
@@ -39,7 +39,7 @@ const Grid = () => {
       // setGraphs(JSON.parse(data));
       const dataGraphs = data.graphs;
       setGraphs(dataGraphs);
-      // setLayout(createLayout(graphs.length))
+      setLayout(createLayout(dataGraphs.length));
       // console.log("data", data.graphs);
       // console.log("length of graphs:", data.graphs.length);
     }
