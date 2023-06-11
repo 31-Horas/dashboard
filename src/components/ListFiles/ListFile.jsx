@@ -13,8 +13,10 @@ import Dialog from '@mui/material/Dialog';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import "./ListFiles.css";
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import Tooltip from "@mui/material/Tooltip";
 
 function ConfirmationDialogRaw(props) {
   const { onClose, value: valueProp, open, ...other } = props;
@@ -45,6 +47,11 @@ function ConfirmationDialogRaw(props) {
     setValue(event.target.value);
   };
 
+  //function to delete files from the s3 bucket
+  function deleteFile(file){
+    console.log("delete files no ha sido implementada en frontend", file);
+  }
+
   return (
     <Dialog
       sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}
@@ -55,25 +62,21 @@ function ConfirmationDialogRaw(props) {
     >
       <DialogTitle>Files</DialogTitle>
       <DialogContent dividers>
-      <RadioGroup
+        <RadioGroup
           ref={radioGroupRef}
           aria-label="files"
           name="files"
           value={value}
           onChange={handleChange}
         >
-          {Array.isArray(value) ? (
-            value.map((file) => (
-              <FormControlLabel
-                value={file}
-                key={file}
-                control={<Radio />}
-                label={file}
-              />
-            ))
-          ) : (
-            <Typography>No files found</Typography>
-          )}
+          {value.map((file) => (
+            <FormControlLabel
+              value={file}
+              key={file}
+              control={<Radio />}
+              label={file}
+            />
+          ))}
         </RadioGroup>
       </DialogContent>
       <DialogActions>
@@ -96,20 +99,23 @@ const ListFile = (props) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([]);
   
-  useEffect(() => {
-    getExistingFiles();
-  }, []);
-  
   const getExistingFiles = async () => {
     try {
       const response = await axios.get("http://localhost:5000/bucket/get_data", { withCredentials: true });
       const files = response.data; // Assuming the response contains the file names
-  
       setValue(files);
     } catch (error) {
       console.error("Error fetching existing files:", error);
     }
   };
+
+  const files2 = ["dummyFile1", "dummyFile2"];
+
+  useEffect(() => {
+    getExistingFiles();
+    setValue(files2);
+  }, []);
+
 
   const handleClickListItem = () => {
     setOpen(true);
@@ -125,7 +131,7 @@ const ListFile = (props) => {
   };
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <Box sx={{width: "50%", bgcolor: 'background.paper' }}>
       <List component="div" role="group">
         <Button 
           className="files-button"

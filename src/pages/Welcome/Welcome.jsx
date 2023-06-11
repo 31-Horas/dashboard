@@ -7,6 +7,7 @@ import { Typography } from '@mui/material';
 import ListFile from '../../components/ListFiles/ListFile';
 import { useState } from 'react';
 import Popup from '../../components/Popup/Popup';
+import PrevFiles from '../../components/PrevFiles/PrevFiles'
 
 const Welcome = () => {
 
@@ -46,7 +47,8 @@ const Welcome = () => {
                                 Upload or choose a file to launch the dashboard.
                             </Typography>
                         </div>
-                        <ListFile func={getFileName}/>
+                        <PrevFiles/>
+                        {/* <ListFile func={getFileName}/> */}
                         <DropzoneComponent onHandle={handleDrop}/>
                     </div>
                 </div>

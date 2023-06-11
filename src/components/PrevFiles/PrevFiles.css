@@ -1,0 +1,11 @@
+.files-button {
+    display: flex;
+    /* padding-top: 25px; */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.prev-files {
+    width: 90%;
+}
