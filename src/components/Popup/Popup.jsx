@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-const Popup = ({openState, title, text, agreeOption}) => {
+const Popup = ({openState, title, text, agreeOption, effect}) => {
 
     const [open, setOpen] = useState(openState);
 
@@ -17,6 +17,7 @@ const Popup = ({openState, title, text, agreeOption}) => {
 
     const handleClose = () => {
         setOpen(false);
+        effect(false);
     };
 
     return (

@@ -44,32 +44,42 @@ const LoginForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
       
-        const response = await axios.post('http://localhost:5000/auth/signin', {
-            email: email,
-            password: password,
-            remember: rememberMe
-        }, {
-            withCredentials: true // Enable sending and receiving cookies
-        });
-            // Handle the response from the backend
-        if (response.status === 200) {
-            //navigates to dashboard
-            navigate("/welcome");
-            // File was successfully uploaded
-            console.log(response.data);
-        } else if (response.status === 401) {
-            // File upload failed
-            console.log(response.data);
-            setShowPopup(true);
+        try {
+            const response = await axios.post('http://localhost:5000/auth/signin', {
+                email: email,
+                password: password,
+                remember: rememberMe
+            }, {
+                withCredentials: true // Enable sending and receiving cookies
+            });
+                // Handle the response from the backend
+            if (response.status === 200) {
+                //navigates to dashboard
+                navigate("/welcome");
+                // File was successfully uploaded
+                console.log(response.data);
+            } else if (response.status === 401) {
+                // File upload failed
+                console.log(response.data);
+                setShowPopup(true);
+            }
+        } catch (error) {
+            console.error("Connection error", error);
+            // setShowPopup(true);
         }
     };
+
+    const setPopFalse = (value) => {
+        console.log("set pop false activated")
+        setShowPopup(value);
+        console.log(showPopup);
+    }
 
 
     return (
         <div className="login-form">
             {showPopup && (
-                <Popup openState={showPopup} title={title} text={popupText} agreeOption={agreeOption} disagreeOption={disagreeOption}>
-                    {setShowPopup(false)}
+                <Popup openState={showPopup} title={title} text={popupText} agreeOption={agreeOption} disagreeOption={disagreeOption} effect={setPopFalse}>
                 </Popup>
             )}
             <div className="logo-login"></div>

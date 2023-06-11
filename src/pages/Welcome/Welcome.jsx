@@ -10,7 +10,6 @@ import Popup from '../../components/Popup/Popup';
 import PrevFiles from '../../components/PrevFiles/PrevFiles'
 
 const Welcome = () => {
-
     usePageRender('/');
 
     function handleDrop(file) {
