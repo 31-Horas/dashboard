@@ -27,6 +27,11 @@ import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import UploadFileDashboard from './UploadFileDashboard/UploadFileDashboard.jsx';
 import FileHistory from './FileHistory/FileHistory.jsx'
+import { useState } from 'react';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
 
 const drawerWidth = 240;
 
@@ -95,7 +100,44 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+
+//FILE HISTORY FUNCTIONALITY
+let prevFiles = ["dummyfile1", "dummyfile2"];
+
+const getExistingFiles = async () => {
+    try {
+        const response = await axios.get("http://localhost:5000/bucket/get_data", { withCredentials: true } );
+        const files = response.data;
+        prevFiles = files;
+    } catch(error) {
+        console.error("Eror fetching existing files", error);
+    }
+}
+
+function deleteFile(file){
+    console.log("delete files no ha sido implementada en frontend", file);
+    const idxFile = prevFiles.indexOf(file);
+    delete prevFiles[idxFile];
+    console.log(prevFiles);
+}
+
+
 const MiniDrawer = () => {
+
+  //File history functionality
+  React.useEffect(() => {
+    getExistingFiles();
+  })
+
+  const [openFileHistory, setOpenFileHistory] = useState(false);
+
+  const handleClickOpenFileHistory = () => {
+    setOpenFileHistory(true);
+  };
+
+  const handleCloseFileHistory = () => {
+    setOpenFileHistory(false);
+  };
 
   const [uploadFile, setUploadFile] = React.useState(false);
 
@@ -104,12 +146,12 @@ const MiniDrawer = () => {
     console.log(uploadFile);
   }
 
-  const [fileHistory, setFileHistory] = React.useState(false);
+  // const [fileHistory, setFileHistory] = React.useState(false);
 
-  const setFileHistoryInChild = (value) => {
-    setFileHistory(value);
-    console.log(fileHistory);
-  }
+  // const setFileHistoryInChild = (value) => {
+  //   setFileHistory(value);
+  //   console.log(fileHistory);
+  // }
 
   //need it for logout
   const navigate = useNavigate();
@@ -150,6 +192,33 @@ const MiniDrawer = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
+
+      {/* FILE HISTORY POPUP JSX */}
+      <Dialog 
+        onClose={handleCloseFileHistory} 
+        open={openFileHistory}
+        sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}
+        maxWidth="xs"
+      >
+        <DialogTitle>Files</DialogTitle>
+        <List sx={{ pt: 0 }}>
+          {prevFiles.map((file) => (
+            <ListItem disableGutters>
+              <ListItemText>
+                <Typography variant="body" marginLeft={2}>
+                  {file}
+                </Typography>
+              </ListItemText>
+              <Tooltip title="delete file">
+                <IconButton onClick={() => {deleteFile(file); handleCloseFileHistory()}} sx={{color: "red"}}>
+                  <DeleteOutlineOutlinedIcon/>
+                </IconButton>
+              </Tooltip>
+            </ListItem>
+          ))}
+        </List>
+      </Dialog>
+
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -232,7 +301,7 @@ const MiniDrawer = () => {
           {/* file history */}
           <ListItem disablePadding sx={{display: 'block'}}>
             <ListItemButton 
-              onClick={() => { setFileHistory(true) }}
+              onClick={handleClickOpenFileHistory}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -245,9 +314,6 @@ const MiniDrawer = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  {fileHistory && (
-                    <FileHistory openState={fileHistory} effect={setFileHistoryInChild}/>
-                  )}
                   <FolderOutlinedIcon/>
                 </ListItemIcon>
                 <ListItemText primary='File History' sx={{ opacity: open ? 1 : 0 }}/>
