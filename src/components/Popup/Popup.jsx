@@ -17,7 +17,9 @@ const Popup = ({openState, title, text, agreeOption, effect}) => {
 
     const handleClose = () => {
         setOpen(false);
-        effect(false);
+        if(effect){
+            effect(false);
+        }
     };
 
     return (

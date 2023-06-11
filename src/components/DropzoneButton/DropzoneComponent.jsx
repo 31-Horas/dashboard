@@ -54,16 +54,16 @@ const DropzoneComponent = ({ onHandle }) => {
       >
           {({ getRootProps, getInputProps }) => (
               <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  {file ? (
-                      <p>File name: {file.name}</p>
-                  ) : (
-                    <div className='cta-button'>
-                      <Typography variant='h6'>
-                        Drag and drop a CSV file here, or click to select a CSV file
-                      </Typography>
-                    </div>
-                  )}
+                <input {...getInputProps()} />
+                {/* {file ? (
+                  <p>File name: {file.name}</p>
+                ) : ( */}
+                  <div className='cta-button'>
+                    <Typography variant='h6'>
+                      Drag and drop a CSV file here, or click to select a CSV file
+                    </Typography>
+                  </div>
+                {/* )} */}
               </div>
           )}
       </Dropzone>
