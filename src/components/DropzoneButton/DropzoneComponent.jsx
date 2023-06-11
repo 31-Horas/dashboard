@@ -59,9 +59,15 @@ const DropzoneComponent = ({ onHandle }) => {
                   <p>File name: {file.name}</p>
                 ) : ( */}
                   <div className='cta-button'>
-                    <Typography variant='h6'>
-                      Drag and drop a CSV file here, or click to select a CSV file
-                    </Typography>
+                    {file ? (
+                      <Typography variant='h6'>
+                        Upload completed successfully
+                      </Typography>
+                    ) : (
+                      <Typography variant='h6'>
+                        Drag and drop a CSV file here, or click to select a CSV file
+                      </Typography>
+                    )}
                   </div>
                 {/* )} */}
               </div>

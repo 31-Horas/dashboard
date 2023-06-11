@@ -26,6 +26,7 @@ import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlin
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import UploadFileDashboard from './UploadFileDashboard/UploadFileDashboard.jsx';
+import FileHistory from './FileHistory/FileHistory.jsx'
 
 const drawerWidth = 240;
 
@@ -101,6 +102,13 @@ const MiniDrawer = () => {
   const setUploadFileInChild = (value) => {
     setUploadFile(value);
     console.log(uploadFile);
+  }
+
+  const [fileHistory, setFileHistory] = React.useState(false);
+
+  const setFileHistoryInChild = (value) => {
+    setFileHistory(value);
+    console.log(fileHistory);
   }
 
   //need it for logout
@@ -224,6 +232,7 @@ const MiniDrawer = () => {
           {/* file history */}
           <ListItem disablePadding sx={{display: 'block'}}>
             <ListItemButton 
+              onClick={() => { setFileHistory(true) }}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -236,6 +245,9 @@ const MiniDrawer = () => {
                     justifyContent: 'center',
                   }}
                 >
+                  {fileHistory && (
+                    <FileHistory openState={fileHistory} effect={setFileHistoryInChild}/>
+                  )}
                   <FolderOutlinedIcon/>
                 </ListItemIcon>
                 <ListItemText primary='File History' sx={{ opacity: open ? 1 : 0 }}/>

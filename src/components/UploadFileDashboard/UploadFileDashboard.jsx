@@ -44,9 +44,9 @@ const UploadFileDashboard = ({openState, effect}) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    {/* <Button onClick={handleClose}>Cancel</Button> */}
                     <Button onClick={handleClose} autoFocus>
-                        Okay
+                        Close
                     </Button>
                 </DialogActions>
             </Dialog>
