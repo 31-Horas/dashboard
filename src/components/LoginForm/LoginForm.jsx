@@ -12,6 +12,11 @@ import axios from 'axios';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Popup from "../Popup/Popup";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -23,11 +28,23 @@ const LoginForm = () => {
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    const [showPopup, setShowPopup] = useState(false);
+
+    // POPUP FUNCTIONALITY
     const title = "Incorrect credentials";
     const popupText = "Email and / or password incorrect.";
     const agreeOption = "okay";
     const disagreeOption = "close"
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -61,27 +78,38 @@ const LoginForm = () => {
             } else if (response.status === 401) {
                 // File upload failed
                 console.log(response.data);
-                setShowPopup(true);
+                setOpen(true);
             }
         } catch (error) {
             console.error("Connection error", error);
-            // setShowPopup(true);
         }
     };
-
-    const setPopFalse = (value) => {
-        console.log("set pop false activated")
-        setShowPopup(value);
-        console.log(showPopup);
-    }
 
 
     return (
         <div className="login-form">
-            {showPopup && (
-                <Popup openState={showPopup} title={title} text={popupText} agreeOption={agreeOption} disagreeOption={disagreeOption} effect={setPopFalse}>
-                </Popup>
-            )}
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {title}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {popupText}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    {/* <Button onClick={handleClose}>{disagreeOption}</Button> */}
+                    <Button onClick={handleClose} autoFocus>
+                        {agreeOption}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
             <div className="logo-login"></div>
             <Typography variant="h4">
                 Welcome to OtterBoard!
