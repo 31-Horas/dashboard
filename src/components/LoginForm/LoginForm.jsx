@@ -7,10 +7,16 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import { Button, FormGroup, Box, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useAsyncError, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Popup from "../Popup/Popup";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -21,6 +27,24 @@ const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+
+    // POPUP FUNCTIONALITY
+    const title = "Incorrect credentials";
+    const popupText = "Email and / or password incorrect.";
+    const agreeOption = "okay";
+    const disagreeOption = "close"
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -37,28 +61,55 @@ const LoginForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
       
-        const response = await axios.post('http://otterboard.me:5000/auth/signin', {
-            email: email,
-            password: password,
-            remember: rememberMe
-        }, {
-            withCredentials: true // Enable sending and receiving cookies
-        });
-            // Handle the response from the backend
-        if (response.status === 200) {
-            //navigates to dashboard
-            navigate("/welcome");
-            // File was successfully uploaded
-            console.log(response.data);
-        } else if (response.status === 401) {
-            // File upload failed
-            console.log(response.data);
+        try {
+            const response = await axios.post('http://localhost:5000/auth/signin', {
+                email: email,
+                password: password,
+                remember: rememberMe
+            }, {
+                withCredentials: true // Enable sending and receiving cookies
+            });
+                // Handle the response from the backend
+            if (response.status === 200) {
+                //navigates to dashboard
+                navigate("/welcome");
+                // File was successfully uploaded
+                console.log(response.data);
+            } else if (response.status === 401) {
+                // File upload failed
+                console.log(response.data);
+                setOpen(true);
+            }
+        } catch (error) {
+            console.error("Connection error", error);
         }
     };
 
 
     return (
         <div className="login-form">
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {title}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {popupText}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    {/* <Button onClick={handleClose}>{disagreeOption}</Button> */}
+                    <Button onClick={handleClose} autoFocus>
+                        {agreeOption}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
             <div className="logo-login"></div>
             <Typography variant="h4">
                 Welcome to OtterBoard!

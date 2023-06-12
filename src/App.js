@@ -10,6 +10,8 @@ import "./App.css"
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import ListFile from './components/ListFiles/ListFile';
+import Popup from './components/Popup/Popup';
+import PrevFiles from './components/PrevFiles/PrevFiles'
 
 function App() {
   const theme = createTheme({
@@ -52,7 +54,7 @@ function App() {
         <Route path="/json" component={JsonPage} />
         <Route path='/welcometest' element={<Welcome/>} />
         <Route path='dashboardtest' element={<Dashboard/>}/>
-        <Route path='files' element={<ListFile/>}/>
+        <Route path='/test' element={<PrevFiles/>}/>
       </Routes>
     </BrowserRouter>
     </ThemeProvider>

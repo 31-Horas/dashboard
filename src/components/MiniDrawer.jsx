@@ -25,6 +25,16 @@ import axios from 'axios';
 import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlined';
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import UploadFileDashboard from './UploadFileDashboard/UploadFileDashboard.jsx';
+import FileHistory from './FileHistory/FileHistory.jsx'
+import { useState } from 'react';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DropzoneComponent from './DropzoneButton/DropzoneComponent.jsx';
+import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
 
@@ -93,7 +103,74 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+
+//FILE HISTORY FUNCTIONALITY
+let prevFiles = ["dummyfile1", "dummyfile2"];
+
+const getExistingFiles = async () => {
+  try {
+      const response = await axios.get("http://localhost:5000/bucket/get_data", { withCredentials: true });
+      const files = response.data; // Store the entire file objects (name and ID)
+      prevFiles = files;
+  } catch (error) {
+      console.error("Error fetching existing files", error);
+  }
+}
+
+function deleteFile(file) {
+  try {
+      const response = axios.delete(`http://localhost:5000/bucket/delete/${file[1]}`, { withCredentials: true });
+      const result = response.data; // Assuming the response contains the deletion result
+      console.log(result); // Optional: Log the deletion result
+      // Perform any necessary actions after successful deletion
+  } catch (error) {
+      console.error("Error deleting file:", error);
+      // Handle the error appropriately
+  }
+};
+
+
 const MiniDrawer = () => {
+
+  //File history functionality
+  React.useEffect(() => {
+    getExistingFiles();
+  })
+
+  const [openFileHistory, setOpenFileHistory] = useState(false);
+
+  const handleClickOpenFileHistory = () => {
+    setOpenFileHistory(true);
+  };
+
+  const handleCloseFileHistory = () => {
+    setOpenFileHistory(false);
+  };
+
+  //Upload file functionality
+  const [openUploadFile, setOpenUploadFile] = useState(false);
+
+  const handleClickOpenUploadFile = () => {
+    setOpenUploadFile(true);
+  };
+
+  const handleCloseUploadFile = () => {
+    setOpenUploadFile(false);
+  };
+
+  // const [uploadFile, setUploadFile] = React.useState(false);
+
+  // const setUploadFileInChild = (value) => {
+  //   setUploadFile(value);
+  //   console.log(uploadFile);
+  // }
+
+  // const [fileHistory, setFileHistory] = React.useState(false);
+
+  // const setFileHistoryInChild = (value) => {
+  //   setFileHistory(value);
+  //   console.log(fileHistory);
+  // }
 
   //need it for logout
   const navigate = useNavigate();
@@ -134,6 +211,54 @@ const MiniDrawer = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
+
+      {/* FILE HISTORY POPUP JSX */}
+      <Dialog 
+        onClose={handleCloseFileHistory} 
+        open={openFileHistory}
+        sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}
+        maxWidth="xs"
+      >
+        <DialogTitle>Files</DialogTitle>
+        <List sx={{ pt: 0 }}>
+          {prevFiles.map((file) => (
+            <ListItem disableGutters>
+              <ListItemText>
+                <Typography variant="body" marginLeft={2}>
+                  {file[0]}
+                </Typography>
+              </ListItemText>
+              <Tooltip title="delete file">
+                <IconButton onClick={() => {deleteFile(file); handleCloseFileHistory()}} sx={{color: "red"}}>
+                  <DeleteOutlineOutlinedIcon/>
+                </IconButton>
+              </Tooltip>
+            </ListItem>
+          ))}
+        </List>
+      </Dialog>
+
+      {/* UPLOAD FILE JSX */}
+      <Dialog
+        open={openUploadFile}
+        onClose={handleCloseUploadFile}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Upload a new file
+        </DialogTitle>
+        <DialogContent>
+          <DropzoneComponent/>
+        </DialogContent>
+        <DialogActions>
+          {/* <Button onClick={handleClose}>Cancel</Button> */}
+          <Button onClick={handleCloseUploadFile} autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -216,6 +341,7 @@ const MiniDrawer = () => {
           {/* file history */}
           <ListItem disablePadding sx={{display: 'block'}}>
             <ListItemButton 
+              onClick={handleClickOpenFileHistory}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -236,6 +362,7 @@ const MiniDrawer = () => {
           {/* upload new file */}
           <ListItem disablePadding sx={{display: 'block'}}>
             <ListItemButton 
+              onClick={handleClickOpenUploadFile}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -254,7 +381,7 @@ const MiniDrawer = () => {
             </ListItemButton>
           </ListItem>
           {/* Profile */}
-          <ListItem disablePadding sx={{display: 'block'}}>
+          {/* <ListItem disablePadding sx={{display: 'block'}}>
             <ListItemButton 
               sx={{
                 minHeight: 48,
@@ -272,7 +399,7 @@ const MiniDrawer = () => {
                 </ListItemIcon>
                 <ListItemText primary='Profile' sx={{ opacity: open ? 1 : 0 }}/>
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
           
         </List>
       </Drawer>

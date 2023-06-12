@@ -6,14 +6,43 @@ import { Line } from "react-chartjs-2";
 import LineChart from "../LineChart/LineChart"
 import { CategoryScale } from 'chart.js';
 import { Chart } from 'chart.js/auto';
+import { GraphicEqSharp } from '@mui/icons-material';
 
 Chart.register(CategoryScale);
 
 const Widget = ({ graphData }) => {
+  // console.log('options', graphData.options);
 
-  console.log("graphdata", graphData);
+  // const data = {
+  //   type: graphData.type,
+  //   data: graphData.data,
+  //   options: graphData.options
+  // }
 
-  const data = graphData;
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulating the asynchronous data fetching
+    setTimeout(() => {
+      // Assuming you receive the data in the format { data: {...}, options: {...} }
+      if (graphData && graphData.data) {
+        setLoading(false); // Set loading to false when data is available
+      }
+    }, 2000); // Simulating a 2-second delay for fetching data
+  }, [graphData]);
+
+  if (loading) {
+    // Render a loading state or placeholder while data is being fetched
+    return <div>Loading...</div>;
+  }
+
+  const data = {
+    type: graphData.type,
+    data: graphData.data,
+    options: graphData.options
+  }
+
+  console.log('made data in widget', data);
 
   const data2 = {
     type: 'bar',
@@ -53,7 +82,7 @@ const Widget = ({ graphData }) => {
         Graph
       </Typography>
       <CardContent sx={{ width: 400, height: 300}}>
-        <LineChart data={data2} /> 
+        <LineChart data={data} /> 
       </CardContent>
     </Card>
   );
