@@ -17,7 +17,7 @@ let prevFiles = ["dummyfile1", "dummyfile2"];
 
 const getExistingFiles = async () => {
     try {
-        const response = await axios.get("http://localhost:5000/bucket/get_data", { withCredentials: true } );
+        const response = await axios.get("http://otterboard.me:5000/bucket/get_data", { withCredentials: true } );
         const files = response.data;
         prevFiles = files;
     } catch(error) {

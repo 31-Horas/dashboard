@@ -10,7 +10,7 @@ const Topbar = () => {
     const navigate = useNavigate();
     async function LogOutFunction() {
         try {
-          const response = await axios.get('http://otterboard.me:5000/auth/logout', { withCredentials: true });
+          const response = await axios.get('http://otterboard.med.me:5000/auth/logout', { withCredentials: true });
       
           if (response.status === 200) {
             navigate("/");

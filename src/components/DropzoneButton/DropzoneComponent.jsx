@@ -30,7 +30,7 @@ const DropzoneComponent = ({ onHandle }) => {
 
       // Send the file using Axios
       const response = await axios.post(
-        'http://localhost:5000/bucket/upload',
+        'http://otterboard.me:5000/bucket/upload',
         formData,
         {
           headers: {

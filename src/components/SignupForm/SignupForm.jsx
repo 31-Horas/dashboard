@@ -59,7 +59,7 @@ const SignupForm = () => {
           return; // Stop form submission if password is invalid
         }
       
-        const response = await axios.post('http://otterboard.me:5000/auth/signup', { email: email, password: password }, { withCredentials: true });
+        const response = await axios.post('http://otterboard.med.me:5000/auth/signup', { email: email, password: password }, { withCredentials: true });
       
 
         // Handle the response from the backend

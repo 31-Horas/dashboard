@@ -36,7 +36,7 @@ const Grid = () => {
   const getData = async () => {
     try {
       //CHANGE THIS CALL TO THE BACKEND CORRECT ONE
-      const { data } = await axios.get('http://localhost:5000/data.json');
+      const { data } = await axios.get('http://otterboard.me:5000/data.json');
       // setGraphs(JSON.parse(data));
       const dataGraphs = data.graphs;
       setGraphs(dataGraphs);

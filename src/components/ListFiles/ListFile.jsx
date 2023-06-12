@@ -50,7 +50,7 @@ function ConfirmationDialogRaw(props) {
   function deleteFile(file){
     try {
       console.log(file)
-      const response = axios.delete(`http://localhost:5000/bucket/delete/${file}`, { withCredentials: true });
+      const response = axios.delete(`http://otterboard.me:5000/bucket/delete/${file}`, { withCredentials: true });
       const result = response.data; // Assuming the response contains the deletion result
       console.log(result); // Optional: Log the deletion result
       // Perform any necessary actions after successful deletion
@@ -110,7 +110,7 @@ const ListFile = (props) => {
   
   const getExistingFiles = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/bucket/get_data", { withCredentials: true });
+      const response = await axios.get("http://otterboard.me:5000/bucket/get_data", { withCredentials: true });
       const files = response.data; // Assuming the response contains the file names
       setValue(files);
     } catch (error) {

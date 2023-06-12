@@ -21,7 +21,7 @@ let prevFiles = ["dummyfile1", "dummyfile2"];
 
 const getExistingFiles = async () => {
     try {
-        const response = await axios.get("http://localhost:5000/bucket/get_data", { withCredentials: true });
+        const response = await axios.get("http://otterboard.me:5000/bucket/get_data", { withCredentials: true });
         const files = response.data; // Store the entire file objects (name and ID)
         prevFiles = files;
     } catch (error) {
@@ -32,7 +32,7 @@ const getExistingFiles = async () => {
 async function deleteFile(file) {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/bucket/delete/${file[1]}`,
+        `http://otterboard.me:5000/bucket/delete/${file[1]}`,
         { withCredentials: true }
       );
       const result = response.data; // Assuming the response contains the deletion result
