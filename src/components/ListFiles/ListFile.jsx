@@ -47,11 +47,20 @@ function ConfirmationDialogRaw(props) {
     setValue(event.target.value);
   };
 
-  //function to delete files from the s3 bucket
   function deleteFile(file){
-    console.log("delete files no ha sido implementada en frontend", file);
-  }
-
+    try {
+      console.log(file)
+      const response = axios.delete(`http://localhost:5000/bucket/delete/${file}`, { withCredentials: true });
+      const result = response.data; // Assuming the response contains the deletion result
+      console.log(result); // Optional: Log the deletion result
+      // Perform any necessary actions after successful deletion
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      // Handle the error appropriately
+    }
+  };
+  
+  
   return (
     <Dialog
       sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}

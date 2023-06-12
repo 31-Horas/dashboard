@@ -1,79 +1,97 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import './Dropzone.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useHistory } from 'react-router-dom';
 import { Typography } from '@mui/material';
 
-
 const DropzoneComponent = ({ onHandle }) => {
-    const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const [file, setFile] = useState(null);
+  const [response, setResponse] = useState(null);
+  const [showMessage, setShowMessage] = useState(true);
 
-    const [file, setFile] = useState(null);
-  
-    async function handleDrop(acceptedFiles) {
-      const droppedFile = acceptedFiles[0];
-  
-      try {
-        const formData = new FormData();
-        formData.append('file', droppedFile);
-        formData.append('filename', droppedFile.name);
-  
-        // Send the file using Axios
-        const response = await axios.post('http://localhost:5000/bucket/upload', formData, {
+  async function handleDrop(acceptedFiles) {
+    const droppedFile = acceptedFiles[0];
+
+    try {
+      const formData = new FormData();
+      formData.append('file', droppedFile);
+      formData.append('filename', droppedFile.name);
+
+      // Check if the file has a CSV or XLSX extension
+      if (
+        !droppedFile.name.toLowerCase().endsWith('.csv') &&
+        !droppedFile.name.toLowerCase().endsWith('.xlsx')
+      ) {
+        console.log('Only CSV and XLSX files are allowed!');
+        return;
+      }
+
+      // Send the file using Axios
+      const response = await axios.post(
+        'http://localhost:5000/bucket/upload',
+        formData,
+        {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-          withCredentials: true // Enable sending and receiving cookies
-        });
-  
-        // Handle the response from the backend
-        if (response.status === 200) {
-          //navigates to dashboard
-          navigate("/dashboard")
-          // File was successfully uploaded
-          console.log(response.data);
-        } else {
-          // File upload failed
-          console.log(response.data);
+          withCredentials: true, // Enable sending and receiving cookies
         }
-      } catch (error) {
-        console.log('Error occurred during file upload', error);
+      );
+
+      // Handle the response from the backend
+      if (response.status === 200) {
+        setResponse(response.data.message);
+        setShowMessage(false);
+        console.log(response.data.message);
+        navigate(`/dashboard?id=${response.data.id}`)
       }
-  
-      setFile(droppedFile);
-      onHandle(droppedFile);
+    } catch (error) {
+      console.log('Error occurred during file upload', error);
     }
-  
-    return (
-      <Dropzone 
-          className="cta-button"
-          onDrop={handleDrop}
-          accept=".csv"
-          onDropRejected={handleDrop}
-      >
-          {({ getRootProps, getInputProps }) => (
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                {/* {file ? (
-                  <p>File name: {file.name}</p>
-                ) : ( */}
-                  <div className='cta-button'>
-                    {file ? (
-                      <Typography variant='h6'>
-                        Upload completed successfully
-                      </Typography>
-                    ) : (
-                      <Typography variant='h6'>
-                        Drag and drop a CSV file here, or click to select a CSV file
-                      </Typography>
-                    )}
-                  </div>
-                {/* )} */}
-              </div>
-          )}
-      </Dropzone>
-    );
-  };
-  
-  export default DropzoneComponent;
+
+    setFile(droppedFile);
+    onHandle(droppedFile);
+  }
+
+  useEffect(() => {
+    let timeoutId;
+    if (!showMessage) {
+      timeoutId = setTimeout(() => {
+        setShowMessage(true);
+      }, 5000);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [showMessage]);
+
+  return (
+    <Dropzone
+      className="cta-button"
+      onDrop={handleDrop}
+      accept=".csv, .xlsx" // Accept both CSV and XLSX files
+      onDropRejected={handleDrop}
+    >
+      {({ getRootProps, getInputProps }) => (
+        <div {...getRootProps()}>
+          <input {...getInputProps()} />
+          <div className="cta-button">
+            {file && response ? (
+              <Typography variant="h6">{response.data}</Typography>
+            ) : (
+              showMessage && (
+                <Typography variant="h6">
+                  Drag and drop a CSV or XLSX file here, or click to select a file
+                </Typography>
+              )
+            )}
+          </div>
+        </div>
+      )}
+    </Dropzone>
+  );
+};
+
+export default DropzoneComponent;

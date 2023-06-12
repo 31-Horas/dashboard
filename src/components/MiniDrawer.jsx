@@ -108,21 +108,26 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 let prevFiles = ["dummyfile1", "dummyfile2"];
 
 const getExistingFiles = async () => {
-    try {
-        const response = await axios.get("http://localhost:5000/bucket/get_data", { withCredentials: true } );
-        const files = response.data;
-        prevFiles = files;
-    } catch(error) {
-        console.error("Eror fetching existing files", error);
-    }
+  try {
+      const response = await axios.get("http://localhost:5000/bucket/get_data", { withCredentials: true });
+      const files = response.data; // Store the entire file objects (name and ID)
+      prevFiles = files;
+  } catch (error) {
+      console.error("Error fetching existing files", error);
+  }
 }
 
-function deleteFile(file){
-    console.log("delete files no ha sido implementada en frontend", file);
-    const idxFile = prevFiles.indexOf(file);
-    delete prevFiles[idxFile];
-    console.log(prevFiles);
-}
+function deleteFile(file) {
+  try {
+      const response = axios.delete(`http://localhost:5000/bucket/delete/${file[1]}`, { withCredentials: true });
+      const result = response.data; // Assuming the response contains the deletion result
+      console.log(result); // Optional: Log the deletion result
+      // Perform any necessary actions after successful deletion
+  } catch (error) {
+      console.error("Error deleting file:", error);
+      // Handle the error appropriately
+  }
+};
 
 
 const MiniDrawer = () => {
@@ -220,7 +225,7 @@ const MiniDrawer = () => {
             <ListItem disableGutters>
               <ListItemText>
                 <Typography variant="body" marginLeft={2}>
-                  {file}
+                  {file[0]}
                 </Typography>
               </ListItemText>
               <Tooltip title="delete file">
